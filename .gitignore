@@ -9,6 +9,7 @@
 **/backup
 **/*.lrs
 **/*.lps
+examples/console/*/*.lpi
 
 examples/console/lftp/lftpclient
 examples/console/lhttp/fpget
@@ -21,3 +22,7 @@ examples/console/ludp/ludp
 
 examples/visual/http/httpclienttest
 examples/visual/telnet/telnet
+examples/visual/ftp/ftptest
+examples/visual/ftp/log.txt
+examples/visual/smtp/smtptest
+examples/visual/tcpudp/testnet
