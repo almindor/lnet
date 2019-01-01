@@ -240,6 +240,7 @@ type
     FListenBacklog: Integer;
     FReuseAddress: Boolean;
     FSession: TLSession;
+    FSocketNet: Integer;
    protected
     function InitSocket(aSocket: TLSocket): TLSocket; virtual;
     
@@ -253,6 +254,7 @@ type
     procedure SetReuseAddress(const aValue: Boolean);
     procedure SetEventer(Value: TLEventer);
     procedure SetSession(aSession: TLSession);
+    procedure SetSocketNet(const aValue: Integer);
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
 
     procedure ConnectAction(aSocket: TLHandle); virtual;
@@ -305,6 +307,7 @@ type
     property EventerClass: TLEventerClass read FEventerClass write FEventerClass;
     property Session: TLSession read FSession write SetSession;
     property ReuseAddress: Boolean read FReuseAddress write SetReuseAddress;
+    property SocketNet: Integer read FSocketNet write SetSocketNet;
   end;
   
   { TLUdp }
@@ -348,7 +351,6 @@ type
 
   TLTcp = class(TLConnection)
    protected
-    FSocketNet: Integer;
     FCount: Integer;
     function InitSocket(aSocket: TLSocket): TLSocket; override;
 
@@ -356,8 +358,6 @@ type
     function GetConnecting: Boolean;
     function GetCount: Integer; override;
     function GetValidSocket: TLSocket;
-
-    procedure SetSocketNet(const aValue: Integer);
 
     procedure ConnectAction(aSocket: TLHandle); override;
     procedure AcceptAction(aSocket: TLHandle); override;
@@ -390,7 +390,6 @@ type
     property Connecting: Boolean read GetConnecting;
     property OnAccept: TLSocketEvent read FOnAccept write FOnAccept;
     property OnConnect: TLSocketEvent read FOnConnect write FOnConnect;
-    property SocketNet: Integer read FSocketNet write SetSocketNet;
   end;
 
   { TLSession }
@@ -980,6 +979,14 @@ begin
   end;
 end;
 
+procedure TLConnection.SetSocketNet(const aValue: Integer);
+begin
+  if GetConnected then
+    raise Exception.Create('Cannot set socket network on a connected system');
+
+  FSocketNet := aValue;
+end;
+
 procedure TLConnection.Notification(AComponent: TComponent;
   Operation: TOperation);
 begin
@@ -1232,7 +1239,11 @@ var
   s: string;
   p: Word;
 begin
-  n := Pos(':', Address);
+  if FSocketNet = LAF_INET6 then
+    n := Pos(':', Address)  // IPv4
+  else
+    n := Pos(']:', Address); // IPv6
+
   if n > 0 then begin
     s := Copy(Address, 1, n-1);
     p := Word(StrToInt(Copy(Address, n+1, Length(Address))));
@@ -1615,14 +1626,6 @@ begin
     Result := FIterator
   else if Assigned(FRootSock) and Assigned(FRootSock.FNextSock) then
     Result := FRootSock.FNextSock;
-end;
-
-procedure TLTcp.SetSocketNet(const aValue: Integer);
-begin
-  if GetConnected then
-    raise Exception.Create('Cannot set socket network on a connected system');
-
-  FSocketNet := aValue;
 end;
 
 function TLTcp.Get(out aData; const aSize: Integer; aSocket: TLSocket): Integer;

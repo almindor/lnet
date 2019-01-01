@@ -1,11 +1,11 @@
 object FormMain: TFormMain
   Left = 582
-  Height = 400
+  Height = 451
   Top = 332
   Width = 390
   ActiveControl = EditPort
   Caption = 'lNet Component Test'
-  ClientHeight = 375
+  ClientHeight = 426
   ClientWidth = 390
   Constraints.MaxWidth = 390
   Constraints.MinHeight = 400
@@ -31,18 +31,18 @@ object FormMain: TFormMain
     ParentColor = False
   end
   object MemoText: TMemo
-    Left = 56
+    Left = 48
     Height = 176
-    Top = 120
+    Top = 160
     Width = 280
     ReadOnly = True
     ScrollBars = ssAutoBoth
     TabOrder = 0
   end
   object ButtonSend: TButton
-    Left = 261
+    Left = 253
     Height = 25
-    Top = 302
+    Top = 342
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Send'
@@ -50,17 +50,17 @@ object FormMain: TFormMain
     TabOrder = 1
   end
   object EditSend: TEdit
-    Left = 56
+    Left = 48
     Height = 29
-    Top = 304
+    Top = 344
     Width = 200
     OnKeyPress = SendEditKeyPress
     TabOrder = 2
   end
   object ButtonConnect: TButton
-    Left = 56
+    Left = 48
     Height = 25
-    Top = 336
+    Top = 376
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Connect'
@@ -68,9 +68,9 @@ object FormMain: TFormMain
     TabOrder = 3
   end
   object ButtonListen: TButton
-    Left = 144
+    Left = 136
     Height = 25
-    Top = 336
+    Top = 376
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Host'
@@ -78,9 +78,9 @@ object FormMain: TFormMain
     TabOrder = 4
   end
   object ButtonDiconnect: TButton
-    Left = 232
+    Left = 224
     Height = 25
-    Top = 336
+    Top = 376
     Width = 104
     BorderSpacing.InnerBorder = 4
     Caption = 'Diconnect'
@@ -89,7 +89,7 @@ object FormMain: TFormMain
   end
   object GBConnection: TRadioGroup
     Left = 24
-    Height = 112
+    Height = 152
     Top = 0
     Width = 144
     AutoFill = True
@@ -102,12 +102,12 @@ object FormMain: TFormMain
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 91
+    ClientHeight = 131
     ClientWidth = 140
     TabOrder = 6
     object RBTCP: TRadioButton
       Left = 6
-      Height = 27
+      Height = 30
       Top = 6
       Width = 128
       Caption = 'TCP/IPv4'
@@ -116,23 +116,32 @@ object FormMain: TFormMain
       TabOrder = 0
       TabStop = True
     end
-    object RBUDP: TRadioButton
+    object RBUDP4: TRadioButton
       Left = 6
-      Height = 27
-      Top = 33
+      Height = 30
+      Top = 36
       Width = 128
-      Caption = 'UDP'
-      OnChange = RBUDPChange
+      Caption = 'UDP/IPv4'
+      OnChange = RBUDP4Change
+      OnClick = RBUDP4Click
       TabOrder = 1
     end
     object RBTCP6: TRadioButton
       Left = 6
-      Height = 25
-      Top = 60
+      Height = 30
+      Top = 66
       Width = 128
       Caption = 'TCP/IPv6'
       OnChange = RBTCP6Change
       TabOrder = 2
+    end
+    object RBUDP6: TRadioButton
+      Left = 6
+      Height = 29
+      Top = 96
+      Width = 128
+      Caption = 'UDP/IPv6'
+      TabOrder = 3
     end
   end
   object EditPort: TEdit

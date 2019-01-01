@@ -17,6 +17,7 @@ type
     ButtonConnect: TButton;
     ButtonListen: TButton;
     CheckBoxSSL: TCheckBox;
+    RBUDP6: TRadioButton;
     SSL: TLSSLSessionComponent;
     LTCP: TLTCPComponent;
     LUDP: TLUDPComponent;
@@ -32,7 +33,7 @@ type
     MenuItemFile: TMenuItem;
     RBTCP6: TRadioButton;
     RBTCP: TRadioButton;
-    RBUDP: TRadioButton;
+    RBUDP4: TRadioButton;
     ButtonSend: TButton;
     EditSend: TEdit;
     MemoText: TMemo;
@@ -51,7 +52,8 @@ type
     procedure MenuItemExitClick(Sender: TObject);
     procedure RBTCP6Change(Sender: TObject);
     procedure RBTCPChange(Sender: TObject);
-    procedure RBUDPChange(Sender: TObject);
+    procedure RBUDP4Change(Sender: TObject);
+    procedure RBUDP4Click(Sender: TObject);
     procedure SendButtonClick(Sender: TObject);
     procedure SendEditKeyPress(Sender: TObject; var Key: char);
     procedure TimerQuitTimer(Sender: TObject);
@@ -195,12 +197,22 @@ begin
     EditIP.Text := 'localhost';
 end;
 
-procedure TFormMain.RBUDPChange(Sender: TObject);
+procedure TFormMain.RBUDP4Change(Sender: TObject);
 begin
   FNet.Disconnect;
   FNet := LUDP;
+  LTCP.SocketNet := LAF_INET;
   if EditIP.Text = '::1' then
     EditIP.Text := 'localhost';
+end;
+
+procedure TFormMain.RBUDP4Click(Sender: TObject);
+begin
+  FNet.Disconnect;
+  FNet := LUDP;
+  LTCP.SocketNet := LAF_INET6;
+  if EditIP.Text = 'localhost' then
+    EditIP.Text := '::1';
 end;
 
 procedure TFormMain.SendEditKeyPress(Sender: TObject; var Key: char);
@@ -218,11 +230,13 @@ procedure TFormMain.SendToAll(const aMsg: string);
 var
   n: Integer;
 begin
-  if FNet is TLUdp then begin // UDP, use broadcast
+  if FNet is TLUdp then begin // UDPv4, use broadcast
+    if FNet.SocketNet = LAF_INET6 then
+      raise Exception.create('Unable to broadcast with UDPv6');
     n := TLUdp(FNet).SendMessage(aMsg, LADDR_BR);
     if n < Length(aMsg) then
       MemoText.Append('Error on send [' + IntToStr(n) + ']');
-  end else begin // TCP
+  end else begin // TCPv4 or TCPv6
     FNet.IterReset; // start at server socket
     while FNet.IterNext do begin // skip server socket, go to clients only
       n := FNet.SendMessage(aMsg, FNet.Iterator);
