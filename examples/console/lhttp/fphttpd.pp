@@ -15,7 +15,7 @@
   You should have received a Copy of the GNU Library General Public License
   along with This library; if not, Write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  
+
   This license has been modified. See file LICENSE.ADDON for more information.
   Should you find these sources without a LICENSE File, please contact
   me at ales@chello.sk
@@ -31,7 +31,7 @@ uses
   BaseUnix, Errors,
 {$endif}
   lhttp, lwebserver, lHTTPSettings, lSpawnFCGI;
-  
+
 type
 
   { TMain }
@@ -54,7 +54,7 @@ type
 
 var
   Main: TMain;
-  
+
 procedure HandleTermSignal(sig: longint); cdecl;
 begin
   Main.Quit := true;
@@ -148,7 +148,7 @@ var
   lRuns: dword;
 begin
   lRuns := $FFFFFFFF;
-  while (lRuns > 0) and (Server.Connected) and (not Quit) do
+  while (lRuns > 0) and (not Quit) do
   begin
     Server.CallAction;
     if Assigned(PHPCGIHandler.Pool.Timer) then
@@ -199,7 +199,7 @@ end;
 
 begin
   Main := TMain.Create;
-  
+
   if ParamStr(1) = '-c' then
     Main.Run(LowerCase(ParamStr(1)) <> '-c')
   else if ParamStr(1) = '-s' then begin
@@ -209,6 +209,6 @@ begin
       WriteUsage;
   end else
     WriteUsage;
-   
+
   Main.Free;
 end.
