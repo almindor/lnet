@@ -7,8 +7,7 @@ Use the makefile to compile the lib as well as examples.
 
 All programs are compiled with Free Pascal 2.0.4+ (http://www.freepascal.org)
 
-Copyright (c) 2005-2011 by Ales Katona and Micha Nelissen.
-All rights reserved.
+Copyright (c) 2005-2018 by Ales Katona and Micha Nelissen.
 
 lNet as of version 0.6+ uses OpenSSL when SSLSession is used.
 
