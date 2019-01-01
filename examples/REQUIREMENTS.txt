@@ -1,0 +1,11 @@
+All visual examples require Lazarus 0.9.26+ (best use latest release)
+
+The only additional requirements for some examples provided here is OpenSSL (http://www.openssl.org)
+
+In UNIX/Linux/MacOSX OpenSSL is usually installed by default, however a DEVELOPMENT package may be required (Ubuntu).
+
+Examples which require OpenSSL:
+
+console/lhttp
+visual/smtp
+visual/http

@@ -1,0 +1,50 @@
+object FormLogs: TFormLogs
+  Left = 382
+  Height = 294
+  Top = 216
+  Width = 386
+  HorzScrollBar.Page = 385
+  VertScrollBar.Page = 293
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsToolWindow
+  Caption = 'Message Logs'
+  ClientHeight = 294
+  ClientWidth = 386
+  Constraints.MinHeight = 294
+  Constraints.MinWidth = 386
+  LCLVersion = '0.9.25'
+  object GroupBoxLog: TGroupBox
+    Left = 160
+    Height = 294
+    Width = 226
+    Align = alClient
+    Caption = 'Log'
+    ClientHeight = 275
+    ClientWidth = 222
+    TabOrder = 0
+    object MemoLogs: TMemo
+      Height = 275
+      Width = 222
+      Align = alClient
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+    end
+  end
+  object GroupBoxFeatures: TGroupBox
+    Height = 294
+    Width = 160
+    Align = alLeft
+    Caption = 'Features'
+    ClientHeight = 275
+    ClientWidth = 156
+    TabOrder = 1
+    object ListBoxFeatures: TListBox
+      Height = 275
+      Width = 156
+      Align = alClient
+      TabOrder = 0
+      TopIndex = -1
+    end
+  end
+end

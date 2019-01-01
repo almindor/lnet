@@ -1,0 +1,31 @@
+LazarusResources.Add('TFormMain','FORMDATA',[
+  'TPF0'#9'TFormMain'#8'FormMain'#4'Left'#3'"'#1#6'Height'#3#207#1#3'Top'#3#190
+  +#0#5'Width'#3'$'#2#18'HorzScrollBar.Page'#3'#'#2#18'VertScrollBar.Page'#3#181
+  +#1#13'ActiveControl'#7#8'EditHost'#7'Caption'#6#18'Telnet test client'#12'Cl'
+  +'ientHeight'#3#182#1#11'ClientWidth'#3'$'#2#4'Menu'#7#9'MainMenu1'#6'OnShow'
+  +#7#8'FormShow'#0#5'TMemo'#8'MemoText'#6'Height'#3'F'#1#3'Top'#2'Y'#5'Width'#3
+  +'$'#2#5'Align'#7#8'alClient'#8'ReadOnly'#9#8'TabOrder'#2#0#0#0#5'TEdit'#8'Ed'
+  +'itSend'#6'Height'#2#23#3'Top'#3#159#1#5'Width'#3'$'#2#5'Align'#7#8'alBottom'
+  +#10'OnKeyPress'#7#16'EditSendKeyPress'#8'TabOrder'#2#1#0#0#9'TGroupBox'#14'G'
+  +'roupBoxServer'#6'Height'#2'Y'#5'Width'#3'$'#2#5'Align'#7#5'alTop'#7'Caption'
+  +#6#6'Server'#12'ClientHeight'#2'F'#11'ClientWidth'#3' '#2#8'TabOrder'#2#2#0#6
+  +'TLabel'#9'LabelHost'#4'Left'#2#6#6'Height'#2#20#3'Top'#2#10#5'Width'#2'#'#7
+  +'Caption'#6#5'Host:'#11'ParentColor'#8#0#0#6'TLabel'#9'LabelPort'#4'Left'#2#6
+  +#6'Height'#2#20#3'Top'#2'*'#5'Width'#2#31#7'Caption'#6#5'Port:'#11'ParentCol'
+  +'or'#8#0#0#5'TEdit'#8'EditHost'#4'Left'#2'F'#6'Height'#2#23#3'Top'#2#7#5'Wid'
+  +'th'#3#208#1#8'TabOrder'#2#0#4'Text'#6#9'localhost'#0#0#5'TEdit'#8'EditPort'
+  +#4'Left'#2'F'#6'Height'#2#23#3'Top'#2''''#5'Width'#2'P'#8'TabOrder'#2#1#4'Te'
+  +'xt'#6#2'23'#0#0#7'TButton'#13'ButtonConnect'#4'Left'#3#158#0#6'Height'#2#25
+  +#3'Top'#2'%'#5'Width'#2'K'#7'Caption'#6#7'Connect'#7'OnClick'#7#18'ButtonCon'
+  +'nectClick'#8'TabOrder'#2#2#0#0#7'TButton'#16'ButtonDisconnect'#4'Left'#3#246
+  +#0#6'Height'#2#25#3'Top'#2'%'#5'Width'#2'`'#7'Caption'#6#10'Disconnect'#7'On'
+  +'Click'#7#21'ButtonDisconnectClick'#8'TabOrder'#2#3#0#0#0#23'TLTelnetClientC'
+  +'omponent'#6'Telnet'#4'Host'#6#9'localhost'#4'Port'#2#23#9'OnConnect'#7#13'T'
+  +'elnetConnect'#12'OnDisconnect'#7#16'TelnetDisconnect'#9'OnReceive'#7#13'Tel'
+  +'netReceive'#7'OnError'#7#11'TelnetError'#9'LocalEcho'#9#4'left'#3#0#2#3'top'
+  +#2'8'#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#3#224#1#3'top'#2'8'#0#9'TMenuIte'
+  +'m'#12'MenuItemFile'#7'Caption'#6#5'&File'#0#9'TMenuItem'#12'MenuItemExit'#7
+  +'Caption'#6#5'E&xit'#7'OnClick'#7#17'MenuItemExitClick'#0#0#0#9'TMenuItem'#12
+  +'MenuItemHelp'#7'Caption'#6#5'&Help'#0#9'TMenuItem'#13'MenuItemAbout'#7'Capt'
+  +'ion'#6#6'&About'#7'OnClick'#7#18'MenuItemAboutClick'#0#0#0#0#0
+]);

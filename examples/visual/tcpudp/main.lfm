@@ -1,0 +1,216 @@
+object FormMain: TFormMain
+  Left = 582
+  Height = 400
+  Top = 332
+  Width = 390
+  ActiveControl = EditPort
+  Caption = 'lNet Component Test'
+  ClientHeight = 377
+  ClientWidth = 390
+  Constraints.MaxWidth = 390
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 390
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '0.9.31'
+  object LabelPort: TLabel
+    Left = 216
+    Height = 18
+    Top = 13
+    Width = 36
+    Caption = 'Port:'
+    ParentColor = False
+  end
+  object LabelHostName: TLabel
+    Left = 176
+    Height = 18
+    Top = 36
+    Width = 78
+    Caption = 'Hostname:'
+    ParentColor = False
+  end
+  object MemoText: TMemo
+    Left = 56
+    Height = 176
+    Top = 120
+    Width = 280
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+  end
+  object ButtonSend: TButton
+    Left = 261
+    Height = 25
+    Top = 302
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Send'
+    OnClick = SendButtonClick
+    TabOrder = 1
+  end
+  object EditSend: TEdit
+    Left = 56
+    Height = 23
+    Top = 304
+    Width = 200
+    OnKeyPress = SendEditKeyPress
+    TabOrder = 2
+  end
+  object ButtonConnect: TButton
+    Left = 56
+    Height = 25
+    Top = 336
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Connect'
+    OnClick = ConnectButtonClick
+    TabOrder = 3
+  end
+  object ButtonListen: TButton
+    Left = 144
+    Height = 25
+    Top = 336
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Host'
+    OnClick = ListenButtonClick
+    TabOrder = 4
+  end
+  object ButtonDiconnect: TButton
+    Left = 232
+    Height = 25
+    Top = 336
+    Width = 104
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Diconnect'
+    OnClick = DiconnectButtonClick
+    TabOrder = 5
+  end
+  object GBConnection: TRadioGroup
+    Left = 24
+    Height = 112
+    Top = 0
+    Width = 144
+    AutoFill = True
+    Caption = 'Connection Type'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 87
+    ClientWidth = 124
+    TabOrder = 6
+    object RBTCP: TRadioButton
+      Left = 6
+      Height = 25
+      Top = 6
+      Width = 112
+      Caption = 'TCP/IPv4'
+      Checked = True
+      OnChange = RBTCPChange
+      TabOrder = 0
+      TabStop = True
+    end
+    object RBUDP: TRadioButton
+      Left = 6
+      Height = 25
+      Top = 31
+      Width = 112
+      Caption = 'UDP'
+      OnChange = RBUDPChange
+      TabOrder = 1
+    end
+    object RBTCP6: TRadioButton
+      Left = 6
+      Height = 25
+      Top = 56
+      Width = 112
+      Caption = 'TCP/IPv6'
+      OnChange = RBTCP6Change
+      TabOrder = 2
+    end
+  end
+  object EditPort: TEdit
+    Left = 261
+    Height = 23
+    Top = 8
+    Width = 59
+    TabOrder = 7
+    Text = '4665'
+  end
+  object EditIP: TEdit
+    Left = 261
+    Height = 23
+    Top = 33
+    Width = 123
+    TabOrder = 8
+    Text = 'localhost'
+  end
+  object CheckBoxSSL: TCheckBox
+    Left = 261
+    Height = 19
+    Top = 64
+    Width = 80
+    Caption = 'Use SSL'
+    TabOrder = 9
+  end
+  object LTCP: TLTCPComponent
+    Port = 0
+    OnReceive = LTCPComponentReceive
+    OnError = LTCPComponentError
+    OnDisconnect = LTCPComponentDisconnect
+    OnConnect = LTCPComponentConnect
+    OnAccept = LTCPComponentAccept
+    Timeout = 0
+    ReuseAddress = True
+    Session = SSL
+    left = 344
+    top = 232
+  end
+  object LUDP: TLUDPComponent
+    Port = 0
+    OnReceive = LTCPComponentReceive
+    OnError = LTCPComponentError
+    Timeout = 0
+    left = 344
+    top = 280
+  end
+  object MainMenu1: TMainMenu
+    left = 344
+    top = 192
+    object MenuItemFile: TMenuItem
+      Caption = '&File'
+      object MenuItemExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = MenuItemExitClick
+      end
+    end
+    object MenuItemHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemAbout: TMenuItem
+        Caption = '&About'
+        OnClick = MenuItemAboutClick
+      end
+    end
+  end
+  object SSL: TLSSLSessionComponent
+    CAFile = 'cert'
+    KeyFile = 'pkey'
+    Method = msSSLv2or3
+    SSLActive = False
+    left = 344
+    top = 144
+  end
+  object TimerQuit: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = TimerQuitTimer
+    left = 344
+    top = 95
+  end
+end

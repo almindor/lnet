@@ -1,0 +1,14 @@
+LightWeight Networking Components
+
+Copyright (c) 2005-2011 by Ales Katona and Micha Nelissen
+
+The lNet Lazarus packages have been separated by functionality into 2.
+
+ * lnetbase.lpk
+ * lnetvisual.lpk
+
+lnetbase.lpk is used for encapsulation of the basic lnet functionality found in non-visual units. It's a helper package required by lnetvisual, and can be used by anyone who just wants to use non-visual lnet (this not requiring LCL) inside Lazarus without bothering with paths.
+
+lnetvisual.lpk contains the visual integration code with LCL, and thus depends on it. It should be used by people who already use LCL in some way and have atleast on active window/form to put the components on (they need a window to function).
+
+All sources in lnet package are released under a modified LGPL license. See files LICENSE and LICENSE.ADDON.

@@ -1,0 +1,19 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TFormLogs','FORMDATA',[
+  'TPF0'#9'TFormLogs'#8'FormLogs'#4'Left'#3'~'#1#6'Height'#3'&'#1#3'Top'#3#216#0
+  +#5'Width'#3#130#1#18'HorzScrollBar.Page'#3#129#1#18'VertScrollBar.Page'#3'%'
+  +#1#11'BorderIcons'#11#12'biSystemMenu'#10'biMinimize'#0#11'BorderStyle'#7#12
+  +'bsToolWindow'#7'Caption'#6#12'Message Logs'#12'ClientHeight'#3'&'#1#11'Clie'
+  +'ntWidth'#3#130#1#21'Constraints.MinHeight'#3'&'#1#20'Constraints.MinWidth'#3
+  +#130#1#10'LCLVersion'#6#6'0.9.25'#0#9'TGroupBox'#11'GroupBoxLog'#4'Left'#3
+  +#160#0#6'Height'#3'&'#1#5'Width'#3#226#0#5'Align'#7#8'alClient'#7'Caption'#6
+  +#3'Log'#12'ClientHeight'#3#19#1#11'ClientWidth'#3#222#0#8'TabOrder'#2#0#0#5
+  +'TMemo'#8'MemoLogs'#6'Height'#3#19#1#5'Width'#3#222#0#5'Align'#7#8'alClient'
+  +#8'ReadOnly'#9#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#0#0#0#9'TGrou'
+  +'pBox'#16'GroupBoxFeatures'#6'Height'#3'&'#1#5'Width'#3#160#0#5'Align'#7#6'a'
+  +'lLeft'#7'Caption'#6#8'Features'#12'ClientHeight'#3#19#1#11'ClientWidth'#3
+  +#156#0#8'TabOrder'#2#1#0#8'TListBox'#15'ListBoxFeatures'#6'Height'#3#19#1#5
+  +'Width'#3#156#0#5'Align'#7#8'alClient'#8'TabOrder'#2#0#8'TopIndex'#2#255#0#0
+  +#0#0
+]);

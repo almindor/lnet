@@ -1,0 +1,140 @@
+object MainForm: TMainForm
+  Left = 467
+  Height = 559
+  Top = 177
+  Width = 647
+  HorzScrollBar.Page = 646
+  VertScrollBar.Page = 531
+  ActiveControl = MemoHTML
+  Caption = 'HTTP Client Test'
+  ClientHeight = 536
+  ClientWidth = 647
+  Constraints.MinHeight = 559
+  Constraints.MinWidth = 647
+  Menu = MainMenu1
+  LCLVersion = '0.9.31'
+  object MenuPanel: TPanel
+    Left = 0
+    Height = 80
+    Top = 456
+    Width = 647
+    Align = alBottom
+    ClientHeight = 80
+    ClientWidth = 647
+    TabOrder = 0
+    object LabelURI: TLabel
+      Left = 11
+      Height = 18
+      Top = 8
+      Width = 28
+      Caption = 'URL'
+      ParentColor = False
+    end
+    object EditURL: TEdit
+      Left = 48
+      Height = 23
+      Top = 5
+      Width = 440
+      OnKeyPress = EditURLKeyPress
+      TabOrder = 0
+      Text = 'http://www.bistrecode.com/test file.txt'
+    end
+    object ButtonSendRequest: TButton
+      Left = 496
+      Height = 25
+      Top = 5
+      Width = 144
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Send Request'
+      OnClick = ButtonSendRequestClick
+      TabOrder = 1
+    end
+    object EditPOST: TEdit
+      Left = 48
+      Height = 23
+      Top = 40
+      Width = 440
+      OnChange = EditPOSTChange
+      TabOrder = 2
+    end
+    object LabelPOST: TLabel
+      Left = 1
+      Height = 18
+      Top = 45
+      Width = 39
+      Caption = 'POST'
+      ParentColor = False
+    end
+    object CheckBoxPOST: TCheckBox
+      Left = 496
+      Height = 19
+      Top = 44
+      Width = 90
+      Caption = 'Use POST'
+      TabOrder = 3
+    end
+  end
+  object MemoStatus: TMemo
+    Left = 0
+    Height = 79
+    Top = 377
+    Width = 647
+    Align = alBottom
+    ScrollBars = ssAutoVertical
+    TabOrder = 1
+  end
+  object MemoHTML: TMemo
+    Left = 0
+    Height = 367
+    Top = 0
+    Width = 647
+    Align = alClient
+    ScrollBars = ssAutoBoth
+    TabOrder = 2
+  end
+  object PanelSep: TPanel
+    Left = 0
+    Height = 10
+    Top = 367
+    Width = 647
+    Align = alBottom
+    TabOrder = 3
+  end
+  object HTTPClient: TLHTTPClientComponent
+    OnCanWrite = HTTPClientCanWrite
+    OnDoneInput = HTTPClientDoneInput
+    OnInput = HTTPClientInput
+    OnProcessHeaders = HTTPClientProcessHeaders
+    OnDisconnect = HTTPClientDisconnect
+    OnError = HTTPClientError
+    Timeout = 0
+    Session = SSL
+    left = 472
+    top = 352
+  end
+  object MainMenu1: TMainMenu
+    left = 584
+    top = 352
+    object MenuItemFile: TMenuItem
+      Caption = '&File'
+      object MenuItemExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = MenuItemExitClick
+      end
+    end
+    object MenuItemHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemAbout: TMenuItem
+        Caption = '&About'
+        OnClick = MenuItemAboutClick
+      end
+    end
+  end
+  object SSL: TLSSLSessionComponent
+    Method = msSSLv2or3
+    SSLActive = False
+    OnSSLConnect = SSLSSLConnect
+    left = 472
+    top = 408
+  end
+end

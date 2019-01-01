@@ -1,0 +1,62 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TFormMain','FORMDATA',[
+  'TPF0'#9'TFormMain'#8'FormMain'#4'Left'#3'F'#2#6'Height'#3#144#1#3'Top'#3'L'#1
+  +#5'Width'#3#134#1#13'ActiveControl'#7#8'EditPort'#7'Caption'#6#19'lNet Compo'
+  +'nent Test'#12'ClientHeight'#3'y'#1#11'ClientWidth'#3#134#1#20'Constraints.M'
+  +'axWidth'#3#134#1#21'Constraints.MinHeight'#3#144#1#20'Constraints.MinWidth'
+  +#3#134#1#4'Menu'#7#9'MainMenu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'F'
+  +'ormCreate'#10'LCLVersion'#6#6'0.9.31'#0#6'TLabel'#9'LabelPort'#4'Left'#3#216
+  +#0#6'Height'#2#18#3'Top'#2#13#5'Width'#2'$'#7'Caption'#6#5'Port:'#11'ParentC'
+  +'olor'#8#0#0#6'TLabel'#13'LabelHostName'#4'Left'#3#176#0#6'Height'#2#18#3'To'
+  +'p'#2'$'#5'Width'#2'N'#7'Caption'#6#9'Hostname:'#11'ParentColor'#8#0#0#5'TMe'
+  +'mo'#8'MemoText'#4'Left'#2'8'#6'Height'#3#176#0#3'Top'#2'x'#5'Width'#3#24#1#8
+  +'ReadOnly'#9#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#0#0#7'TButton'
+  +#10'ButtonSend'#4'Left'#3#5#1#6'Height'#2#25#3'Top'#3'.'#1#5'Width'#2'K'#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Send'#7'OnClick'#7#15'SendBut'
+  +'tonClick'#8'TabOrder'#2#1#0#0#5'TEdit'#8'EditSend'#4'Left'#2'8'#6'Height'#2
+  +#23#3'Top'#3'0'#1#5'Width'#3#200#0#10'OnKeyPress'#7#16'SendEditKeyPress'#8'T'
+  +'abOrder'#2#2#0#0#7'TButton'#13'ButtonConnect'#4'Left'#2'8'#6'Height'#2#25#3
+  +'Top'#3'P'#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#7
+  +'Connect'#7'OnClick'#7#18'ConnectButtonClick'#8'TabOrder'#2#3#0#0#7'TButton'
+  +#12'ButtonListen'#4'Left'#3#144#0#6'Height'#2#25#3'Top'#3'P'#1#5'Width'#2'K'
+  +#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Host'#7'OnClick'#7#17'List'
+  +'enButtonClick'#8'TabOrder'#2#4#0#0#7'TButton'#15'ButtonDiconnect'#4'Left'#3
+  +#232#0#6'Height'#2#25#3'Top'#3'P'#1#5'Width'#2'h'#25'BorderSpacing.InnerBord'
+  +'er'#2#4#7'Caption'#6#9'Diconnect'#7'OnClick'#7#20'DiconnectButtonClick'#8'T'
+  +'abOrder'#2#5#0#0#11'TRadioGroup'#12'GBConnection'#4'Left'#2#24#6'Height'#2
+  +'p'#3'Top'#2#0#5'Width'#3#144#0#8'AutoFill'#9#7'Caption'#6#15'Connection Typ'
+  +'e'#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6
+  +#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSi'
+  +'zing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkH'
+  +'orizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScal'
+  +'eChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'Chil'
+  +'dSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'W'#11'ClientWidth'#2'|'#8'T'
+  +'abOrder'#2#6#0#12'TRadioButton'#5'RBTCP'#4'Left'#2#6#6'Height'#2#25#3'Top'#2
+  +#6#5'Width'#2'p'#7'Caption'#6#8'TCP/IPv4'#7'Checked'#9#8'OnChange'#7#11'RBTC'
+  +'PChange'#8'TabOrder'#2#0#7'TabStop'#9#0#0#12'TRadioButton'#5'RBUDP'#4'Left'
+  +#2#6#6'Height'#2#25#3'Top'#2#31#5'Width'#2'p'#7'Caption'#6#3'UDP'#8'OnChange'
+  +#7#11'RBUDPChange'#8'TabOrder'#2#1#0#0#12'TRadioButton'#6'RBTCP6'#4'Left'#2#6
+  +#6'Height'#2#25#3'Top'#2'8'#5'Width'#2'p'#7'Caption'#6#8'TCP/IPv6'#8'OnChang'
+  +'e'#7#12'RBTCP6Change'#8'TabOrder'#2#2#0#0#0#5'TEdit'#8'EditPort'#4'Left'#3#5
+  +#1#6'Height'#2#23#3'Top'#2#8#5'Width'#2';'#8'TabOrder'#2#7#4'Text'#6#4'4665'
+  +#0#0#5'TEdit'#6'EditIP'#4'Left'#3#5#1#6'Height'#2#23#3'Top'#2'!'#5'Width'#2
+  +'{'#8'TabOrder'#2#8#4'Text'#6#9'localhost'#0#0#9'TCheckBox'#11'CheckBoxSSL'#4
+  +'Left'#3#5#1#6'Height'#2#19#3'Top'#2'@'#5'Width'#2'P'#7'Caption'#6#7'Use SSL'
+  +#8'TabOrder'#2#9#0#0#14'TLTCPComponent'#4'LTCP'#4'Port'#2#0#9'OnReceive'#7#20
+  +'LTCPComponentReceive'#7'OnError'#7#18'LTCPComponentError'#12'OnDisconnect'#7
+  +#23'LTCPComponentDisconnect'#9'OnConnect'#7#20'LTCPComponentConnect'#8'OnAcc'
+  +'ept'#7#19'LTCPComponentAccept'#7'Timeout'#2#0#12'ReuseAddress'#9#7'Session'
+  +#7#3'SSL'#4'left'#3'X'#1#3'top'#3#232#0#0#0#14'TLUDPComponent'#4'LUDP'#4'Por'
+  +'t'#2#0#9'OnReceive'#7#20'LTCPComponentReceive'#7'OnError'#7#18'LTCPComponen'
+  +'tError'#7'Timeout'#2#0#4'left'#3'X'#1#3'top'#3#24#1#0#0#9'TMainMenu'#9'Main'
+  +'Menu1'#4'left'#3'X'#1#3'top'#3#192#0#0#9'TMenuItem'#12'MenuItemFile'#7'Capt'
+  +'ion'#6#5'&File'#0#9'TMenuItem'#12'MenuItemExit'#7'Caption'#6#5'E&xit'#7'OnC'
+  +'lick'#7#17'MenuItemExitClick'#0#0#0#9'TMenuItem'#12'MenuItemHelp'#7'Caption'
+  +#6#5'&Help'#0#9'TMenuItem'#13'MenuItemAbout'#7'Caption'#6#6'&About'#7'OnClic'
+  +'k'#7#18'MenuItemAboutClick'#0#0#0#0#21'TLSSLSessionComponent'#3'SSL'#6'CAFi'
+  +'le'#6#4'cert'#7'KeyFile'#6#4'pkey'#6'Method'#7#10'msSSLv2or3'#9'SSLActive'#8
+  +#4'left'#3'X'#1#3'top'#3#144#0#0#0#6'TTimer'#9'TimerQuit'#7'Enabled'#8#8'Int'
+  +'erval'#3#200#0#7'OnTimer'#7#14'TimerQuitTimer'#4'left'#3'X'#1#3'top'#2'_'#0
+  +#0#0
+]);

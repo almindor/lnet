@@ -1,0 +1,75 @@
+LazarusResources.Add('TMainForm','FORMDATA',[
+  'TPF0'#9'TMainForm'#8'MainForm'#4'Left'#3'|'#1#6'Height'#3#249#1#3'Top'#3#129
+  +#0#5'Width'#3#213#2#13'ActiveControl'#7#6'Panel1'#11'BorderIcons'#11#12'biSy'
+  +'stemMenu'#10'biMinimize'#10'biMaximize'#6'biHelp'#0#7'Caption'#6#15'FTP Tes'
+  +'t Client'#12'ClientHeight'#3#228#1#11'ClientWidth'#3#213#2#21'Constraints.M'
+  +'inHeight'#3#144#1#20'Constraints.MinWidth'#3#213#2#4'Menu'#7#8'MainMenu'#7
+  +'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'Form'
+  +'Destroy'#9'OnKeyDown'#7#11'FormKeyDown'#10'LCLVersion'#6#6'0.9.29'#0#5'TMem'
+  +'o'#8'MemoText'#4'Left'#2#0#6'Height'#2'b'#3'Top'#3's'#1#5'Width'#3#213#2#5
+  +'Align'#7#8'alBottom'#8'ReadOnly'#9#10'ScrollBars'#7#14'ssAutoVertical'#8'Ta'
+  +'bOrder'#2#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#3'B'#1#3'Top'#2#24
+  +#5'Width'#3#213#2#5'Align'#7#8'alClient'#12'ClientHeight'#3'B'#1#11'ClientWi'
+  +'dth'#3#213#2#8'TabOrder'#2#1#0#12'TFileListBox'#8'LeftView'#4'Left'#2#1#6'H'
+  +'eight'#3'@'#1#3'Top'#2#1#5'Width'#3#183#0#5'Align'#7#6'alLeft'#9'Directory'
+  +#6#10'C:\lazarus'#14'ExtendedSelect'#8#8'FileType'#11#10'ftReadOnly'#8'ftHid'
+  +'den'#8'ftSystem'#10'ftVolumeID'#11'ftDirectory'#9'ftArchive'#8'ftNormal'#0
+  +#10'ItemHeight'#2#0#10'OnDblClick'#7#16'LeftViewDblClick'#9'PopupMenu'#7#9'P'
+  +'opupLeft'#6'Sorted'#8#5'Style'#7#16'lbOwnerDrawFixed'#8'TabOrder'#2#0#8'Top'
+  +'Index'#2#255#0#0#9'TSplitter'#9'Splitter2'#4'Left'#3#184#0#6'Height'#3'@'#1
+  +#3'Top'#2#1#5'Width'#2#5#0#0#11'TStringGrid'#7'rmtGrid'#4'Left'#3#189#0#6'He'
+  +'ight'#3'@'#1#3'Top'#2#1#5'Width'#3#23#2#5'Align'#7#8'alClient'#8'ColCount'#2
+  +#6#7'Columns'#14#1#13'Title.Caption'#6#1' '#5'Width'#2#25#0#1#13'Title.Capti'
+  +'on'#6#4'File'#5'Width'#3#249#0#0#1#13'Title.Caption'#6#4'Size'#5'Width'#2'^'
+  +#0#1#13'Title.Caption'#6#4'Date'#5'Width'#2'H'#0#1#13'Title.Caption'#6#10'At'
+  +'tributes'#5'Width'#2'G'#0#1#13'Title.Caption'#6#5'Links'#5'Width'#2#0#0#0#16
+  +'DefaultRowHeight'#2#16#9'FixedCols'#2#0#13'GridLineWidth'#2#0#7'Options'#11
+  +#15'goFixedVertLine'#15'goFixedHorzLine'#11'goColSizing'#11'goRowSelect'#19
+  +'goHeaderHotTracking'#18'goHeaderPushedLook'#0#9'PopupMenu'#7#10'PopupRight'
+  +#8'RowCount'#2#1#8'TabOrder'#2#1#10'TitleStyle'#7#8'tsNative'#14'OnCompareCe'
+  +'lls'#7#19'rmtGridCompareCells'#10'OnDblClick'#7#15'rmtGridDblClick'#10'OnDr'
+  +'awCell'#7#15'rmtGridDrawCell'#13'OnHeaderClick'#7#18'rmtGridHeaderClick'#9
+  +'OnKeyDown'#7#14'rmtGridKeyDown'#0#0#0#9'TSplitter'#9'Splitter1'#6'Cursor'#7
+  +#8'crVSplit'#4'Left'#2#0#6'Height'#2#5#3'Top'#3'n'#1#5'Width'#3#213#2#5'Alig'
+  +'n'#7#8'alBottom'#12'ResizeAnchor'#7#8'akBottom'#0#0#10'TStatusBar'#4'SBar'#4
+  +'Left'#2#0#6'Height'#2#15#3'Top'#3#213#1#5'Width'#3#213#2#6'Panels'#14#1#5'W'
+  +'idth'#3#150#0#0#1#5'Width'#2'd'#0#1#5'Width'#3#250#0#0#1#5'Width'#2'2'#0#0
+  +#11'SimplePanel'#8#0#0#8'TToolBar'#8'ToolBar1'#4'Left'#2#0#6'Height'#2#24#3
+  +'Top'#2#0#5'Width'#3#213#2#7'Caption'#6#8'ToolBar1'#12'ShowCaptions'#9#8'Tab'
+  +'Order'#2#2#0#11'TToolButton'#11'ToolButton1'#4'Left'#2#1#3'Top'#2#2#6'Actio'
+  +'n'#7#14'accSiteManager'#0#0#11'TToolButton'#11'ToolButton3'#4'Left'#2'X'#3
+  +'Top'#2#2#5'Width'#2#13#7'Caption'#6#11'ToolButton3'#5'Style'#7#10'tbsDivide'
+  +'r'#0#0#11'TToolButton'#11'ToolButton4'#4'Left'#2'e'#3'Top'#2#2#6'Action'#7
+  +#10'accConnect'#7'Grouped'#9#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#11'T'
+  +'oolButton2'#4'Left'#3#159#0#3'Top'#2#2#6'Action'#7#13'accDisconnect'#4'Down'
+  +#9#7'Grouped'#9#5'Style'#7#8'tbsCheck'#0#0#0#12'TProgressBar'#12'ProgressBar'
+  +'1'#4'Left'#2#0#6'Height'#2#20#3'Top'#3'Z'#1#5'Width'#3#213#2#5'Align'#7#8'a'
+  +'lBottom'#4'Step'#2#1#8'TabOrder'#2#5#0#0#9'TMainMenu'#8'MainMenu'#4'left'#3
+  +#128#1#3'top'#3'p'#1#0#9'TMenuItem'#12'MenuItemFile'#7'Caption'#6#5'&File'#0
+  +#9'TMenuItem'#15'MenuSiteManager'#6'Action'#7#14'accSiteManager'#7'OnClick'#7
+  +#21'accSiteManagerExecute'#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#1'-'#0
+  +#0#9'TMenuItem'#12'MenuItemExit'#7'Caption'#6#5'E&xit'#7'OnClick'#7#17'ExitM'
+  +'enuItemClick'#0#0#0#9'TMenuItem'#12'MenuItemHelp'#7'Caption'#6#5'&Help'#0#9
+  +'TMenuItem'#16'MenuItemFeatures'#7'Caption'#6#9'&Features'#7'OnClick'#7#21'M'
+  +'enuItemFeaturesClick'#0#0#9'TMenuItem'#13'MenuItemAbout'#7'Caption'#6#6'&Ab'
+  +'out'#7'OnClick'#7#18'AboutMenuItemClick'#0#0#0#0#10'TPopupMenu'#10'PopupRig'
+  +'ht'#4'left'#3'8'#2#3'top'#3'p'#1#0#9'TMenuItem'#8'PupupGet'#7'Caption'#6#3
+  +'Get'#7'OnClick'#7#15'rmtGridDblClick'#0#0#9'TMenuItem'#11'PopupDelete'#7'Ca'
+  +'ption'#6#6'Delete'#7'OnClick'#7#16'DeletePopupClick'#0#0#9'TMenuItem'#13'Me'
+  +'nuItemMkdir'#7'Caption'#6#13'New directory'#7'OnClick'#7#18'MenuItemMkdirCl'
+  +'ick'#0#0#9'TMenuItem'#11'PopupRename'#7'Caption'#6#6'Rename'#7'OnClick'#7#16
+  +'RenamePopupClick'#0#0#0#20'TLFTPClientComponent'#3'FTP'#9'OnConnect'#7#10'F'
+  +'TPConnect'#6'OnSent'#7#7'FTPSent'#9'OnReceive'#7#10'FTPReceive'#9'OnControl'
+  +#7#10'FTPControl'#7'OnError'#7#8'FTPError'#9'OnSuccess'#7#10'FTPSuccess'#9'O'
+  +'nFailure'#7#10'FTPSuccess'#8'PipeLine'#8#7'Timeout'#2#0#4'left'#3#200#0#3't'
+  +'op'#3'p'#1#0#0#10'TPopupMenu'#9'PopupLeft'#4'left'#3#208#1#3'top'#3'p'#1#0#9
+  ,'TMenuItem'#10'PopupLInfo'#7'Caption'#6#4'Info'#7'OnClick'#7#15'LInfoPopupCl'
+  +'ick'#0#0#9'TMenuItem'#12'PopupLDelete'#7'Caption'#6#6'Delete'#7'OnClick'#7
+  +#17'LDeletePopupClick'#0#0#9'TMenuItem'#12'PopupLRename'#7'Caption'#6#6'Rena'
+  +'me'#7'OnClick'#7#17'LRenamePopupClick'#0#0#0#11'TActionList'#11'ActionList1'
+  +#4'left'#3' '#1#3'top'#3'p'#1#0#7'TAction'#14'accSiteManager'#7'Caption'#6#12
+  +'Site Manager'#9'OnExecute'#7#21'accSiteManagerExecute'#0#0#7'TAction'#10'ac'
+  +'cConnect'#7'Caption'#6#7'Connect'#9'OnExecute'#7#17'accConnectExecute'#0#0#7
+  +'TAction'#13'accDisconnect'#7'Caption'#6#10'Disconnect'#9'OnExecute'#7#20'ac'
+  +'cDisconnectExecute'#0#0#0#0
+]);

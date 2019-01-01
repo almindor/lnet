@@ -1,0 +1,118 @@
+object FormMain: TFormMain
+  Left = 290
+  Height = 463
+  Top = 190
+  Width = 548
+  HorzScrollBar.Page = 547
+  VertScrollBar.Page = 437
+  ActiveControl = EditHost
+  Caption = 'Telnet test client'
+  ClientHeight = 438
+  ClientWidth = 548
+  Menu = MainMenu1
+  OnShow = FormShow
+  object MemoText: TMemo
+    Height = 326
+    Top = 89
+    Width = 548
+    Align = alClient
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object EditSend: TEdit
+    Height = 23
+    Top = 415
+    Width = 548
+    Align = alBottom
+    OnKeyPress = EditSendKeyPress
+    TabOrder = 1
+  end
+  object GroupBoxServer: TGroupBox
+    Height = 89
+    Width = 548
+    Align = alTop
+    Caption = 'Server'
+    ClientHeight = 70
+    ClientWidth = 544
+    TabOrder = 2
+    object LabelHost: TLabel
+      Left = 6
+      Height = 20
+      Top = 10
+      Width = 35
+      Caption = 'Host:'
+      ParentColor = False
+    end
+    object LabelPort: TLabel
+      Left = 6
+      Height = 20
+      Top = 42
+      Width = 31
+      Caption = 'Port:'
+      ParentColor = False
+    end
+    object EditHost: TEdit
+      Left = 70
+      Height = 23
+      Top = 7
+      Width = 464
+      TabOrder = 0
+      Text = 'localhost'
+    end
+    object EditPort: TEdit
+      Left = 70
+      Height = 23
+      Top = 39
+      Width = 80
+      TabOrder = 1
+      Text = '23'
+    end
+    object ButtonConnect: TButton
+      Left = 158
+      Height = 25
+      Top = 37
+      Width = 75
+      Caption = 'Connect'
+      OnClick = ButtonConnectClick
+      TabOrder = 2
+    end
+    object ButtonDisconnect: TButton
+      Left = 246
+      Height = 25
+      Top = 37
+      Width = 96
+      Caption = 'Disconnect'
+      OnClick = ButtonDisconnectClick
+      TabOrder = 3
+    end
+  end
+  object Telnet: TLTelnetClientComponent
+    Host = 'localhost'
+    Port = 23
+    OnConnect = TelnetConnect
+    OnDisconnect = TelnetDisconnect
+    OnReceive = TelnetReceive
+    OnError = TelnetError
+    LocalEcho = True
+    left = 512
+    top = 56
+  end
+  object MainMenu1: TMainMenu
+    left = 480
+    top = 56
+    object MenuItemFile: TMenuItem
+      Caption = '&File'
+      object MenuItemExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = MenuItemExitClick
+      end
+    end
+    object MenuItemHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemAbout: TMenuItem
+        Caption = '&About'
+        OnClick = MenuItemAboutClick
+      end
+    end
+  end
+end

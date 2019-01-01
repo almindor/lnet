@@ -1,0 +1,9 @@
+LazarusResources.Add('ftp_archive','XPM',[
+  '/* XPM */'#10'static char *ftp_archive[] = {'#10'/* columns rows colors char'
+  +'s-per-pixel */'#10'"15 13 5 1",'#10'"  c black",'#10'". c red",'#10'"X c ye'
+  +'llow",'#10'"o c None",'#10'"O c #808080",'#10'/* pixels */'#10'"ooooooooooo'
+  +'oooo",'#10'"o..oo.ooooooooo",'#10'"o...o.ooOOOoooo",'#10'"oo....oOXXXOOoo",'
+  +#10'"ooo...OXXXOXXOo",'#10'"o.....        o",'#10'"ooooo XXX XXX o",'#10'"oo'
+  +'ooo XXX XXX o",'#10'"ooooo         o",'#10'"ooooo XXX XXX o",'#10'"ooooo XX'
+  +'X XXX o",'#10'"ooooo         o",'#10'"ooooooooooooooo"'#10'};'#10
+]);

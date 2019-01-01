@@ -1,0 +1,20 @@
+* version 0.6.5 13.03.2011 -- lnetbase fixes, no visual changes
+* version 0.6.4 09.05.2010 -- added qt4 interface
+* version 0.6.3 12.02.2010 -- lots of small fixes and file movements to avoid conflicts
+* version 0.6.2 29.05.2008 -- huge fixes in SMTP, Sessions (visual bugs too, AV on component delete fixed, sharing of sessions fixed etc.)
+* version 0.6.1 24.04.2008 -- fix SSL CAFile and KeyFile mandatority
+* version 0.6.0 12.02.2008 -- added visual telnet + examples, fixed some telnet bugs, made TCP sending simpler (optional)
+* version 0.5.8 04.09.2007 -- fixed problems with windows visual component, fixed SMTP RFC compliance
+* version 0.5.7 20.08.2007 -- fixes Darwin MSG_NOSIGNAL to use SO_NOSIGPIPE instead
+* version 0.5.6 04.08.2007 -- fixed UFP.Disconnect potential AV bug and loss of error numbers in some situations
+* version 0.5.5 15.07.2007 -- fixes TCP.IterReset and documentation, makes Timeout signed for -1 (blocking mode)
+* version 0.5.4 08.07.2007 -- fixes some UDP bugs and TCP.Count
+* version 0.5.3 25.06.2007 -- fixes FTP bugs, removes Timout from published, fixed default published values
+* version 0.5.2 11.06.2007 -- fixes bug in windows and wince LCLEventer
+* version 0.5.1 01.06.2007 -- fixes in WinCE (bugged in 0.5.0)
+* Version 0.5.0 01.04.2007 -- new major release, removes hacks regarding type reintroduction thanks to new Lazarus fix, fixes windows blocking problem with dialogs and menus.
+* Version 0.4.0 25.09.2006 -- added LCLEventer and new http client visual example
+* Version 0.4.0 16.02.2006 -- changed internals to support eventer
+* Version 0.3.1 03.01.2005 -- removed MT support. fixed lots of bugs and overhauled interface
+* Version 0.2.0 29.11.2005
+* Version 0.1.0 12.11.2005 -- fixed some minor MT bugs, added ST LCL version

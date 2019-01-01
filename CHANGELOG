@@ -1,0 +1,47 @@
+13.03.2011 - 0.6.5 fixed lingering sockets after server-side disconnect, SSL and IPv6 support completed (also server-side), DecodeURL fixes for http
+
+09.05.2010 - 0.6.4 fixed a small FTP bug in case of retreiving inaccessible file. Added Qt4 lazarus visual interface integration code
+
+12.02.2010 - 0.6.3 lots of small fixes and OpenSSL file rename to avoid conflicts
+
+29.05.2008 - 0.6.2 huge fixes in SSL, Sessions and SMTP
+
+24.04.2008 - 0.6.1 fix SSL in regards to KeyFile and CAFile (no longer mandatory)
+
+03.04.2008 - 0.6.0 reverted TCP sending changes (too bloaty, not modular). Fixed lots of bugs. Added SSL support!
+
+12.02.2008 - 0.6.0 made TCP sending more user-friendly (optional), fixed some telnet stuff, added visual telnet + examples
+
+04.09.2007 - 0.5.8 fixed Windows visual problems with .Disconnect and .Free, fixed SMTP RFC compliance
+
+20.08.2007 - 0.5.7 fixed Darwin's MSG_NOSIGNAL (doesn't exist, but changed it to use SO_NOSIGPIPE). Fixed timeouts to be signed (forgotten commit in 0.5.5?)
+
+04.08.2007 - 0.5.6 fixed UDP.Disconnect (AV) and loss of error numbers in TLSocket.Get/Send
+
+15.07.2007 - 0.5.5 fixed TCP.IterReset (goes to server socket always now), fixed some doc errata, changed .Timeout to signed, -1 means block until event
+
+08.07.2007 - 0.5.4 fixed bugs with UDP.Listen and UDP.Connect as well as some other minor issues
+
+25.06.2007 - 0.5.3 fixed bugs with FTP and TCP(iterator with Listen)
+
+11.06.2007 - 0.5.2 fixed bug in windows (wince too) LCLEventer (potential memory corruption)
+
+01.06.2007 - 0.5.1 added MIME support for SMTP and others. Fixes some potential bugs in FTP and SMTP. Added winCE support (fixed from 0.5.0)
+
+01.04.2007 - 0.5.0 new major release due to API changes and Lazarus fixes. And it's not a joke :)
+
+25.09.2006 - 0.4.0 now ready for release
+
+24.08.2006 - 0.4.0 preparations for 0.4 release, cleanification of examples
+
+12.03.2006 - 0.4.0 fixed epoll and kqueue
+
+16.02.2006 - 0.4.0 added eventer support with kqueue and epoll for BSDs and Linux. Changed internal layout a bit and added SMTP and PING protocols. Neli added http server class/component and fphttpd daemon.
+
+22.01.2006 - 0.3.1 "stable" is out now. Unified handling of events between platforms and visual/non-visual lnet. Added documentation and FAQ to page. Fixed disconnect bug.
+
+14.01.2006 - Prerelease has been overhauled. New style of socket event handling permitted simplifications between LCL and Select models. Removed CallConnections and connectionlist.
+
+05.01.2006 - Prerelease for "visual" 0.3/2.4.0 version. Lots of API changes (post 2.4.0 will be STABLE, no more changes) and fixed send issues. OnReceive now only informes of possible Receive call. User must use Get<> functions. (saves time and memory because no internal buffer is used)
+
+22.12.2005 - Fixed ugly send bug which cause data loss on network overload 

@@ -1,0 +1,209 @@
+object frmSites: TfrmSites
+  Left = 331
+  Height = 321
+  Top = 226
+  Width = 553
+  ActiveControl = txtSite
+  Caption = 'Registered Sites'
+  ClientHeight = 321
+  ClientWidth = 553
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  LCLVersion = '0.9.29'
+  object Label1: TLabel
+    Left = 8
+    Height = 16
+    Top = 8
+    Width = 34
+    Caption = 'Sites:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 172
+    Height = 16
+    Top = 208
+    Width = 62
+    Caption = 'Local Path'
+    ParentColor = False
+  end
+  object lbSites: TListBox
+    Left = 8
+    Height = 287
+    Top = 24
+    Width = 156
+    Anchors = [akTop, akLeft, akBottom]
+    ItemHeight = 0
+    OnClick = lbSitesClick
+    PopupMenu = PopupMenuSites
+    TabOrder = 0
+    TopIndex = -1
+  end
+  object txtHost: TLabeledEdit
+    Left = 172
+    Height = 25
+    Top = 72
+    Width = 241
+    Anchors = [akTop, akLeft, akRight]
+    EditLabel.AnchorSideLeft.Control = txtHost
+    EditLabel.AnchorSideBottom.Control = txtHost
+    EditLabel.Left = 172
+    EditLabel.Height = 16
+    EditLabel.Top = 53
+    EditLabel.Width = 28
+    EditLabel.Caption = 'Host'
+    EditLabel.ParentColor = False
+    TabOrder = 2
+    OnChange = txtSiteChange
+  end
+  object txtPath: TLabeledEdit
+    Left = 172
+    Height = 25
+    Top = 120
+    Width = 369
+    Anchors = [akTop, akLeft, akRight]
+    EditLabel.AnchorSideLeft.Control = txtPath
+    EditLabel.AnchorSideBottom.Control = txtPath
+    EditLabel.Left = 172
+    EditLabel.Height = 16
+    EditLabel.Top = 101
+    EditLabel.Width = 27
+    EditLabel.Caption = 'Path'
+    EditLabel.ParentColor = False
+    TabOrder = 4
+    OnChange = txtSiteChange
+  end
+  object txtUser: TLabeledEdit
+    Left = 172
+    Height = 25
+    Top = 169
+    Width = 185
+    Anchors = [akTop, akLeft, akRight]
+    EditLabel.AnchorSideLeft.Control = txtUser
+    EditLabel.AnchorSideBottom.Control = txtUser
+    EditLabel.Left = 172
+    EditLabel.Height = 16
+    EditLabel.Top = 150
+    EditLabel.Width = 28
+    EditLabel.Caption = 'User'
+    EditLabel.ParentColor = False
+    TabOrder = 5
+    OnChange = txtSiteChange
+  end
+  object txtPass: TLabeledEdit
+    Left = 373
+    Height = 25
+    Top = 169
+    Width = 168
+    Anchors = [akTop, akRight]
+    EchoMode = emPassword
+    EditLabel.AnchorSideLeft.Control = txtPass
+    EditLabel.AnchorSideBottom.Control = txtPass
+    EditLabel.Left = 373
+    EditLabel.Height = 16
+    EditLabel.Top = 150
+    EditLabel.Width = 26
+    EditLabel.Caption = 'Pass'
+    EditLabel.ParentColor = False
+    PasswordChar = '+'
+    TabOrder = 6
+    OnChange = txtSiteChange
+  end
+  object txtSite: TLabeledEdit
+    Left = 172
+    Height = 25
+    Top = 24
+    Width = 369
+    Anchors = [akTop, akLeft, akRight]
+    EditLabel.AnchorSideLeft.Control = txtSite
+    EditLabel.AnchorSideBottom.Control = txtSite
+    EditLabel.Left = 172
+    EditLabel.Height = 16
+    EditLabel.Top = 5
+    EditLabel.Width = 24
+    EditLabel.Caption = 'Site'
+    EditLabel.ParentColor = False
+    TabOrder = 1
+    OnChange = txtSiteChange
+  end
+  object btnSave: TBitBtn
+    Left = 276
+    Height = 46
+    Top = 265
+    Width = 95
+    Anchors = [akRight, akBottom]
+    Caption = 'Save Site'
+    NumGlyphs = 0
+    OnClick = btnSaveClick
+    TabOrder = 8
+  end
+  object btnClose: TBitBtn
+    Left = 470
+    Height = 46
+    Top = 265
+    Width = 71
+    Anchors = [akRight, akBottom]
+    Caption = 'Close'
+    NumGlyphs = 0
+    OnClick = btnCloseClick
+    TabOrder = 10
+  end
+  object btnConnect: TBitBtn
+    Left = 376
+    Height = 46
+    Top = 265
+    Width = 90
+    Anchors = [akRight, akBottom]
+    Caption = 'Connect'
+    NumGlyphs = 0
+    OnClick = btnConnectClick
+    TabOrder = 9
+  end
+  object btnAddSite: TBitBtn
+    Left = 172
+    Height = 46
+    Top = 265
+    Width = 99
+    Anchors = [akRight, akBottom]
+    Caption = 'Add Site'
+    NumGlyphs = 0
+    OnClick = btnAddSiteClick
+    TabOrder = 7
+  end
+  object txtPort: TLabeledEdit
+    Left = 421
+    Height = 25
+    Top = 72
+    Width = 120
+    Anchors = [akTop, akRight]
+    EditLabel.AnchorSideLeft.Control = txtPort
+    EditLabel.AnchorSideBottom.Control = txtPort
+    EditLabel.Left = 421
+    EditLabel.Height = 16
+    EditLabel.Top = 53
+    EditLabel.Width = 25
+    EditLabel.Caption = 'Port'
+    EditLabel.ParentColor = False
+    TabOrder = 3
+    Text = '21'
+  end
+  object txtLDir: TDirectoryEdit
+    Left = 172
+    Height = 25
+    Top = 224
+    Width = 345
+    ShowHidden = False
+    ButtonWidth = 23
+    NumGlyphs = 0
+    Anchors = [akTop, akLeft, akRight]
+    MaxLength = 0
+    TabOrder = 11
+    OnChange = txtSiteChange
+  end
+  object PopupMenuSites: TPopupMenu
+    left = 507
+    object MenuItemSiteDelete: TMenuItem
+      Caption = '&Delete'
+      OnClick = MenuItemSiteDeleteClick
+    end
+  end
+end

@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <MainUnit Value="0"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1" Active="Default">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="lnetvisual"/>
+        <MinVersion Minor="6" Release="5" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCLBase"/>
+        <MinVersion Major="1" Release="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="4">
+      <Unit0>
+        <Filename Value="stress2.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="stress2"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="umain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="umain"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="15"/>
+        <CursorPos X="52" Y="49"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../lazaruspackage/lnetcomponents.pas"/>
+        <UnitName Value="lNetComponents"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="169"/>
+        <CursorPos X="9" Y="187"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../lib/lnet.pp"/>
+        <UnitName Value="lNet"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="133"/>
+        <CursorPos X="18" Y="157"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position1>
+      <Position2>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1549" Column="1" TopLine="1541"/>
+      </Position2>
+      <Position3>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position3>
+      <Position4>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1551" Column="1" TopLine="1541"/>
+      </Position4>
+      <Position5>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1554" Column="1" TopLine="1541"/>
+      </Position5>
+      <Position6>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position6>
+      <Position7>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1556" Column="1" TopLine="1541"/>
+      </Position7>
+      <Position8>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position8>
+      <Position9>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1549" Column="1" TopLine="1541"/>
+      </Position9>
+      <Position10>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position10>
+      <Position11>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1551" Column="1" TopLine="1541"/>
+      </Position11>
+      <Position12>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1554" Column="1" TopLine="1541"/>
+      </Position12>
+      <Position13>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position13>
+      <Position14>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1549" Column="1" TopLine="1541"/>
+      </Position14>
+      <Position15>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position15>
+      <Position16>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1552" Column="17" TopLine="1541"/>
+      </Position16>
+      <Position17>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position17>
+      <Position18>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1549" Column="1" TopLine="1541"/>
+      </Position18>
+      <Position19>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position19>
+      <Position20>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position20>
+      <Position21>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1549" Column="1" TopLine="1541"/>
+      </Position21>
+      <Position22>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1550" Column="1" TopLine="1541"/>
+      </Position22>
+      <Position23>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1548" Column="1" TopLine="1541"/>
+      </Position23>
+      <Position24>
+        <Filename Value="../../lib/lnet.pp"/>
+        <Caret Line="1553" Column="55" TopLine="1541"/>
+      </Position24>
+      <Position25>
+        <Filename Value="umain.pas"/>
+        <Caret Line="19" Column="38" TopLine="10"/>
+      </Position25>
+      <Position26>
+        <Filename Value="umain.pas"/>
+        <Caret Line="47" Column="40" TopLine="16"/>
+      </Position26>
+      <Position27>
+        <Filename Value="umain.pas"/>
+        <Caret Line="33" Column="27" TopLine="16"/>
+      </Position27>
+      <Position28>
+        <Filename Value="umain.pas"/>
+        <Caret Line="42" Column="20" TopLine="8"/>
+      </Position28>
+      <Position29>
+        <Filename Value="umain.pas"/>
+        <Caret Line="38" Column="34" TopLine="15"/>
+      </Position29>
+      <Position30>
+        <Filename Value="umain.pas"/>
+        <Caret Line="31" Column="17" TopLine="15"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="10"/>
+    <Target>
+      <Filename Value="stress2"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="True"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="Tmp.FConnectionStatus"/>
+      </Item1>
+    </Watches>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

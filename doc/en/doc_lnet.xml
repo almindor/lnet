@@ -1,0 +1,2391 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="lnet">
+
+<!--
+  ====================================================================
+    lNet
+  ====================================================================
+-->
+
+<module name="lNet">
+<short>lNet - Lightweight Networking Unit contains the implementation of base classes, UDP and TCP protocols</short>
+<descr>
+The purpose of lNet library is to provide easy to use object oriented abstraction
+for networking with IPv4 protocol. The library strives to provide a cross-platform
+solution which is simple to use, yet powerful and efficient.
+</descr>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="Classes">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="lEvents">
+<short>The event model abstraction</short>
+<descr>
+This unit provides the abstraction of event notification models on various operating
+systems.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="BaseUnix">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="NetDB">
+<short>Provides basic DNS functionality</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="SysUtils">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="Sockets">
+<short>Provides basic socket abstractions layer</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LADDR_ANY">
+<short>Shortcut for the IPv4 address '0.0.0.0'</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LADDR_BR">
+<short>Shortcut for the IPv4 address '255.255.255.255'</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LADDR_LO">
+<short>Shortcut for the IPv4 address '127.0.0.1'</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LPROTO_IP">
+<short>Constant specifying the value of IP protocol for socket() call</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LPROTO_TCP">
+<short>Constant specifying the value of TCP protocol for socket() call</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LPROTO_UDP">
+<short>Constant specifying the value of UDP protocol for socket() call</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="LPROTO_IPV6">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLSocket">
+<short>Basic implementation of TLHandle abstract class providing IP socket functionality.</short>
+<descr>
+TLSocket class provides basic IP socket functionality and properties. It is an implementation of the abstract TLHandle class. This class shouldn't be used directly unless one requires direct access to the socket.
+</descr>
+<errors>
+</errors>
+<seealso>
+TLHandle
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLComponent">
+<short>Basic abstraction of network connections.</short>
+<descr>
+This is a basic abstract class providing interface for all network connections. It must not be instantiated.
+</descr>
+<errors>
+</errors>
+<seealso>
+TLConnection
+</seealso>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLSocketErrorEvent">
+<short>Error event callback</short>
+<descr>
+This callback serves in the TLSocket class as an error event mechanism. User assigns his method to this callback. Whenever a network error occurs, the callback is triggered.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocketErrorEvent.msg">
+<short>String message containing the network error description as well as it's number</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocketErrorEvent.aSocket">
+<short>The socket on which the network error happened</short>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLSocketEvent">
+<short>Generic event callback</short>
+<descr>
+This callback serves as a basic generic callback for any non-error event in the socket. The event could be anything from receive notification to disconnect event.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocketEvent.aSocket">
+<short>The socket on which the generic event triggered</short>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLSocketProgressEvent">
+<short>Progress event callback</short>
+<descr>
+This callback serves as progress notification event. It reports progress of given activity on the socket.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocketProgressEvent.aSocket">
+<short>The socket on which progress is reported</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocketProgressEvent.Bytes">
+<short>The number of bytes processed</short>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLSocket.Create">
+<short>Constructor for an IPv4 socket</short>
+<descr>
+This is the default constructor for the IPv4 socket class.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TLSocket.Destroy">
+<short>Destructor for an IPv4 socket</short>
+<descr>
+This is the default destructor for the IPv4 socket class.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.Listen">
+<short>Listen on given socket</short>
+<descr>
+This method begins listening on given socket. It's required argument is the port on which to listen. An optional argument specified the interface on which to listen, defaults to LADDR_ANY.
+</descr>
+<errors>
+</errors>
+<seealso>
+Accept
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.Listen.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Listen.APort">
+<short>The port on which to listen for new connections</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Listen.AIntf">
+<short>Interface on which to listen. Defaults to LADDR_ANY</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.Accept">
+<short>Accepts new connection on a listening socket</short>
+<descr>
+This method accepts a new connection. The argument is the server socket on which listens for new connections.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.Accept.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Accept.SerSock">
+<short>The server TLSocket which listens for new connections</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.Connect">
+<short>Connects to a networked host</short>
+<descr>
+This method connects the given socket to the host on other side. It's arguments specify the address and port on which to connect. If the socket is UDP, this method simply sets the peer address and port internal variables.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.Connect.Result">
+<short>Returns true on !initial! success. Actual connect is reported with the OnConnect event</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Connect.Address">
+<short>The address of the networked host in hostname or IP notation (eg: 'localhost' or '127.0.0.1')</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Connect.APort">
+<short>The port of the networked host</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.Send">
+<short>Sends data to the other side</short>
+<descr>
+This method sends arbitrary data to the other end. If the socket isn't connected it returns 0, otherwise it returns the number of bytes successfuly sent.
+</descr>
+<errors>
+</errors>
+<seealso>
+SendMessage
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.Send.Result">
+<short>Returns the number of bytes successfully sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Send.aData">
+<short>The generic data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Send.aSize">
+<short>Size of the data to send</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.SendMessage">
+<short>Sends a string message to the other side</short>
+<descr>
+This method sends a string message to the other side. Result is the number of bytes from the string succesfuly sent.
+</descr>
+<errors>
+</errors>
+<seealso>
+Send
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.SendMessage.Result">
+<short>Returns the number of bytes successfully sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.SendMessage.msg">
+<short>The message to send</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.Get">
+<short>Receives data from the other side</short>
+<descr>
+This method receives data from the other side and inputs them into the user buffer. Returns the number of bytes received.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.Get.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Get.aData">
+<short>The user data buffer to receive into</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.Get.aSize">
+<short>Maximum number of bytes to receive into the user buffer</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLSocket.GetMessage">
+<short>Receives data and inputs it into a string</short>
+<descr>
+This method received data from the other side and inputs it into a string.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLSocket.GetMessage.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLSocket.GetMessage.msg">
+<short>The string to put data into</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLSocket.Disconnect">
+<short>Disconnects the socket</short>
+<descr>
+This method disconnects the socket from the other side. Has no effect with UDP protocol.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.Connected">
+<short>Property specifying the connection status of socket</short>
+<descr>
+This property is true if a connection is open. It has no reason in UDP sockets.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.Connecting">
+<short>Property specifying the connecting status of socket</short>
+<descr>
+This property is true if there's a connect attempt in progress, but not yet finished on the socket. Has no reason with UDP.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.Blocking">
+<short>Specifies the blocking setting of socket</short>
+<descr>
+Sockets can be set either to block or not. Default setting is non-blocking. Blocking sockets will possibly block on all their operations.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.ListenBacklog">
+<short>Specifies the size of listen backlog for the listen call</short>
+<descr>
+This property is used to set the maximum number of listen backlog size used in listen call. Defaults to 5.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.Protocol">
+<short>Specifies the protocol number of the socket</short>
+<descr>
+This property is used to specify the protocol number of the given socket. Defaults to LPROTO_TCP.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.SocketType">
+<short>Specifies the type of socket</short>
+<descr>
+This property is used to specify the socket type. Sockets can be currently of type SOCK_STREAM or SOCK_DGRAM. Stream or datagram.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.PeerAddress">
+<short>Specifies the peer network address</short>
+<descr>
+This property is used to specify the peer network address after a connection is established, or in case of UDP, after a datagram was received.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.PeerPort">
+<short>Specifies the peer port</short>
+<descr>
+This property specifies the peer port number after a connection is established, or in case of UDP, after a datagram was received.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.LocalAddress">
+<short>Specifies the local address of socket</short>
+<descr>
+This protocol can be used read the local address of given socket.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.LocalPort">
+<short>Specifies the local port of socket</short>
+<descr>
+This protocol can be used to read the local port of given socket.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.NextSock">
+<short>Specifies the next socket in linked list</short>
+<descr>
+This property is used by protocol classes to work on all their sockets in double linked lists. It returns the next socket in the list if any is present, or nil.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.PrevSock">
+<short>Specifies the previous socket in linked list</short>
+<descr>
+This property is used by protocol classes to work on all their sockets in double linked lists. It returns the previous socket in the list if any is present, or nil.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLSocket.Creator">
+<short>Specifies the creator of socket</short>
+<descr>
+This property specifies who created the given socket. If the socket was created by a protocol class, it returns that protocol class. Returns nil otherwise.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- "class of" type Visibility: default -->
+<element name="TLSocketClass">
+<short>Metaclass for protocols to use as classfactory</short>
+<descr>
+This is the metaclass of the TLSocket class. It is used by protocols to specify the type of socket to use when creating sockets.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration type Visibility: default -->
+<element name="TLActionEnum">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TLActionEnum.acConnect">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TLActionEnum.acAccept">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TLActionEnum.acSend">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TLActionEnum.acReceive">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TLActionEnum.acError">
+<short></short>
+</element>
+
+<!-- object Visibility: default -->
+<element name="ILComponent">
+<short>Interface which specifies basic network component</short>
+<descr>
+This interface is used as the bare minimum specification of any network component. It contains the absolute minimum methods and properties any connection/protocol should contain.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="ILComponent.Disconnect">
+<short></short>
+<descr>
+Each connection should support direct disconnecting, even if it's not the proper way (eg: SMTP is a nice example).
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="ILComponent.CallAction">
+<short>Method to eventize the component</short>
+<descr>
+This method is used to "eventize" the activity in given component. It ensures that all network events are noticed and acted upon.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: default -->
+<element name="ILComponent.SocketClass">
+<short>Specifies the socket class type for given component</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: default -->
+<element name="ILComponent.Host">
+<short>Specifies the host to connect to</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: default -->
+<element name="ILComponent.Port">
+<short>Specifies the port to connect to</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="ILDirect">
+<short>Interface for direct connection components</short>
+<descr>
+This interface specifies those network components which offer a direct connection. Protocols like TCP or UDP fall into this category, since the user can directly send raw data on them. Protocols like SMTP or FTP on the other hand do not, because the data on these protocols is specific, or the transfer is even one sided.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILDirect.Get">
+<short>Method for getting data from the other side</short>
+<descr>
+This method specifies how to get data from the other side. See specific implementor classes for specific details.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILDirect.Get.Result">
+<short>Number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Get.aData">
+<short>User receive buffer to receive data into</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Get.aSize">
+<short>Maximum size of data to receive</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Get.aSocket">
+<short>Socket on which to receive, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILDirect.GetMessage">
+<short>Method for getting string messages from the other side</short>
+<descr>
+This method gets data from the other side and inpus it into user string.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILDirect.GetMessage.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.GetMessage.msg">
+<short>The string message to put data in</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.GetMessage.aSocket">
+<short>The socket on which to receive, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILDirect.Send">
+<short>Method used to send data to the other side</short>
+<descr>
+This method is used to send data over a connection to the other side. See specific implementor classes for more information.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILDirect.Send.Result">
+<short>Returns number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Send.aData">
+<short>The user data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Send.aSize">
+<short>Size of the user data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.Send.aSocket">
+<short>Socket on which to send, defaults to nil</short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILDirect.SendMessage">
+<short>Method used to send string messages to the other side</short>
+<descr>
+This method sends a string message to the other side.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILDirect.SendMessage.Result">
+<short>Returns the number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.SendMessage.msg">
+<short>The message to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILDirect.SendMessage.aSocket">
+<short>This is the socket on which to send, defaults to nil</short>
+</element>
+
+<!-- object Visibility: default -->
+<element name="ILServer">
+<short>Interface for any server protocol</short>
+<descr>
+This interface is used as the basis for all server specific protocol implementations.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILServer.Listen">
+<short>Specifies the listen method</short>
+<descr>
+This method is used to listen to new connections on given port.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILServer.Listen.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILServer.Listen.APort">
+<short>Port to listen on</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILServer.Listen.AIntf">
+<short>Interface to listen on, defaults to '0.0.0.0'</short>
+</element>
+
+<!-- object Visibility: default -->
+<element name="ILClient">
+<short>Interface to specify client protocols</short>
+<descr>
+This interface is used to specify any client protocol implementations.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: default -->
+<element name="ILClient.Connect">
+<short>Specifies connection method</short>
+<descr>
+This method is used to specify connecting to the other side.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="ILClient.Connect.Result">
+<short>Returns true on initial success. Connection status is reported via OnConnect</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILClient.Connect.Address">
+<short>The address to connect to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ILClient.Connect.APort">
+<short>Port to connect on</short>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLComponent.Create">
+<short>Standard constructor for the component class</short>
+<descr>
+This is the default constructor for the component class
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLComponent.Create.aOwner">
+<short>Owner of the component as defined in TComponent</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLComponent.Disconnect">
+<short>Disconnects connection</short>
+<descr>
+This method cuts all communication and disconnects connection gracefuly.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLComponent.CallAction">
+<short>Eventizes the component</short>
+<descr>
+This method is used to eventize the component. It's used to find out events on all it's sockets and act on them. 
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TLComponent.SocketClass">
+<short>The socket class of the component</short>
+<descr>
+This property specified the socket class this component will use to create it's sockets.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLComponent.Host">
+<short>Specifies the host to act on</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLComponent.Port">
+<short>Specifies the port to act on</short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLComponent.Creator">
+<short>Creator of the component</short>
+<descr>
+This property specifies the creator of the component. It is used to find out who created this component if it's created by a classfactory.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLConnection">
+<short>Basic TCP and UDP abstraction class</short>
+<descr>
+This class is used as a common ancestor to both TCP and UDP connection protocols. It has all the common methods and properties of both those connections.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLConnection.Create">
+<short>Standard constructor</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Create.aOwner">
+<short>Owner as per TComponent</short>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TLConnection.Destroy">
+<short>Standard destructor</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.Connect">
+<short>Connects the connection to the remote host</short>
+<descr>
+This method is used to connect to the specifies remote host.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.Connect.Result">
+<short>Returns true on initial success. Result of connecting is reported via OnConnect event</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Connect.Address">
+<short>The address to connect to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Connect.APort">
+<short>The port to connect on</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.Listen">
+<short>Listens for new connections</short>
+<descr>
+This method is used to initiate listening for new connections. 
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.Listen.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Listen.APort">
+<short>The port to listen on</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Listen.AIntf">
+<short>The interface to listen on, defaults to '0.0.0.0'</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.Get">
+<short>Receives data from the other side</short>
+<descr>
+This method is used to receive data sent from the other side
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.Get.Result">
+<short>Returns number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Get.aData">
+<short>Specifies the user buffer to receive to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Get.aSize">
+<short>Specifies the maximum size to receive</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Get.aSocket">
+<short>Specifies the socket to receive on, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.GetMessage">
+<short>Receives message from the other side</short>
+<descr>
+This method is used to receive data into a string message from the other side. See specific implementor classes for more details.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.GetMessage.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.GetMessage.msg">
+<short>The user string to receive to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.GetMessage.aSocket">
+<short>The socket to receive on, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.Send">
+<short>Send data to the other side</short>
+<descr>
+This method is used to send data to the other side. See specific implementor classes for more details.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.Send.Result">
+<short>Returns the number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Send.aData">
+<short>The user data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Send.aSize">
+<short>Size of the data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Send.aSocket">
+<short>Socket to send on, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.SendMessage">
+<short>Send a string message to the other side</short>
+<descr>
+This method is used to send a string message to the other side. See specific implementor classes for more details.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.SendMessage.Result">
+<short>Returns the number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.SendMessage.msg">
+<short>The user message to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.SendMessage.aSocket">
+<short>Socket to send on, defaults to nil. See specific implementor classes for meaning of nil socket argument</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLConnection.IterNext">
+<short>Iterator for cycling all sockets in a connection</short>
+<descr>
+This method is used to iterate all the sockets in given connection. It returns true if Iterator was moved to the next socket or false if there was no socket to move on. In case it returns false, the iterator is reset with IterReset automatically.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLConnection.IterNext.Result">
+<short>Returns true if there is a next socket, false otherwise (and resets the iterator)</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLConnection.IterReset">
+<short>Reset the iterator</short>
+<descr>
+This method is used to reset the socket iterator to the first socket. See specific implementor classes for more info.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.OnError">
+<short>Error event callback</short>
+<descr>
+This callback is used to get error events if a network error occurs.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.OnReceive">
+<short>Receive event callback</short>
+<descr>
+This callback is used to get receive events when they occur.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.OnDisconnect">
+<short>Disconnect event callback</short>
+<descr>
+This callback is used to get disconnect event when it occurs.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.OnCanSend">
+<short>Send possibility event callback</short>
+<descr>
+This callback is used to see when sending is again possible. This callback doesn't normally happen. It is triggered only if the user sent so much data that additional sending would block. Once that happens, the connection watches for possibility of sending again without blocking and reports it with this callback.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Socks">
+<short>The array property of sockets on connection</short>
+<descr>
+<pre>
+This is an array property containing all sockets in the connection.
+
+Note that the order of sockets it NOT given durins the lifetime of a given connection. 
+For example in a TCP server, you might initially have 3 active sockets. 
+But later, socket 1 might disconnect. This means that socket 2 becomes socket 1 and socket 3 becomes socket 2.
+This property is therefor deprecated and might get removed.
+
+The iterator property with IterReset and IterNext should be used to go over all sockets in a connection.
+If you require indexing of sockets, your design is somehow flawed.
+(I know that lNet used this in the past, but it was a mistake)
+</pre>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLConnection.Socks.index">
+<short>Index of socket</short>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Count">
+<short>Count of sockets in connection</short>
+<descr>
+This property specifies the total number of sockets in the connection.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Connected">
+<short>Specifies connected status</short>
+<descr>
+This property specifies if the connection is connected.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.ListenBacklog">
+<short>Specifies the size of listen backlog</short>
+<descr>
+This property specifies the maximum size of listen backlog for the listen() call.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Iterator">
+<short>The socket iterator property</short>
+<descr>
+This is the socket iterator property. It returns the "current" socket in iteration.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Timeout">
+<short>Specifies the timeout on CallAction</short>
+<descr>
+This property specifies how much can the connection block on the CallAction call. Default is 0 which means don't block. If any positive number is given, CallAction will block that number of milliseconds or less if an event occurred. If -1 is given, CallAction will block until an event happens.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.Eventer">
+<short>Specifies the eventer for connection</short>
+<descr>
+This property specifies the eventer for given connection. It is defaultly created, however users can opt to have one eventer for many connections which is more efficient. 
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLConnection.EventerClass">
+<short>Specify the eventer class to use</short>
+<descr>
+This property can be used to specify which eventer will the connection create. It must be assigned prior to connecting or listening for connections.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLUdp">
+<short>Concrete connection implementation of the UDP protocol</short>
+<descr>
+This is the specific connection implementation of the UDP protocol. It is used for all UDP connections in higher protocols.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLUdp.Create">
+<short>Standard constructor</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Create.aOwner">
+<short>Owner as per TComponent</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.Connect">
+<short>"Connects" to the other side</short>
+<descr>
+This method sets the peer address and port of the UDP socket.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.Connect.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Connect.Address">
+<short>The address to connect to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Connect.APort">
+<short>The port to connect to</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.Listen">
+<short>Listens for new connections</short>
+<descr>
+This method is used to initiate listening for new TCP connections. 
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.Listen.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Listen.APort">
+<short>The port to listen on</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Listen.AIntf">
+<short>The interface to liste on, defaults to '0.0.0.0'</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.Get">
+<short>Method used to receive data from the other side</short>
+<descr>
+This method is used to receive data from the other side, into the user buffer. Socket does not need to be specified as UDP has only one socket all the times.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.Get.Result">
+<short>Returns number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Get.aData">
+<short>The user buffer to receive data into</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Get.aSize">
+<short>Maximum size of the data to receive</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Get.aSocket">
+<short>The socket to receive on, defaults to nil. There is no need to specify the socket as UDP always has only one socket.</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.GetMessage">
+<short>Method used to receive message from the other side</short>
+<descr>
+This method is used to receive message from the other side and put it into a string. Socket does not need to be specified in any case as UDP has only one socket at all times.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.GetMessage.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.GetMessage.msg">
+<short>The message to receive into</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.GetMessage.aSocket">
+<short>The socket to receive on, defaults to nil. Socket does not need to be specified as UDP has only one all the time.</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.SendMessage">
+<short>Send a message to the other side</short>
+<descr>
+This method is used to send a string message to the other side. Socket does not need to be specified as UDP has only one socket all the times.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.SendMessage.Result">
+<short>Returns number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.SendMessage.msg">
+<short>The user message to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.SendMessage.aSocket">
+<short>The socket to send on, defaults to nil. Socket does not need to be specified as UDP has only one socket all the times.</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.SendMessage.Address">
+<short>The address to send to, with UDP you can send to not-connected host. Format is 'ip:port' or 'host:port'</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.Send">
+<short>Send data to the other side</short>
+<descr>
+This method sends user data to the other side. Socket does not need to be specified as UDP has only one socket all the times.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.Send.Result">
+<short>Returns number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Send.aData">
+<short>User data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Send.aSize">
+<short>Maximum size of the data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Send.aSocket">
+<short>Socket on which to send, defaults to nil. Socket does not need to be specified as UDP has only one socket all the times</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLUdp.Send.Address">
+<short>The address to which to send, with UDP you can send to non-connected hosts. Format is 'ip:port' or 'host:port'</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLUdp.IterNext">
+<short>Get next iterator</short>
+<descr>
+This method is used to get the Iterator to point to the next socket. In UDP there's always only 1 socket tho.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLUdp.IterNext.Result">
+<short>Returns false (UDP has only one socket)</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLUdp.IterReset">
+<short>Resets the socket iterator</short>
+<descr>
+Not much reason for it in UDP
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLUdp.Disconnect">
+<short>"Disconnect"</short>
+<descr>
+This method is not useful in UDP
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLUdp.CallAction">
+<short>Eventize the connection</short>
+<descr>
+This method makes sure all the events get called. This method ensures detection of events and should be called periodicly depending on timeout.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLTcp">
+<short>Concrete implementation of TCP protocol connection</short>
+<descr>
+This is the specific implementation of TCP protocol connection used in all higher protocols.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLTcp.Create">
+<short>Standard constructor</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Create.aOwner">
+<short>Owner as per TComponent</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.Connect">
+<short>Connects to the other side</short>
+<descr>
+This method is used to open a TCP connection to a remote host.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.Connect.Result">
+<short>Returns true on initial success. Connection result is reported via OnConnect event</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Connect.Address">
+<short>The address to conenct to</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Connect.APort">
+<short>The port to connect on</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.Listen">
+<short>Start listening for new connections</short>
+<descr>
+This method is used to start listening for new TCP connections.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.Listen.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Listen.APort">
+<short>The port to listen on</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Listen.AIntf">
+<short>The interface to listen on, defaults to '0.0.0.0'</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.Get">
+<short>Receive data from the other side</short>
+<descr>
+<pre>This method is used to receive data from the other side. 
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).
+</pre>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.Get.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Get.aData">
+<short>The user data buffer</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Get.aSize">
+<short>Maximum number of bytes to receive</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Get.aSocket">
+<short><pre>The socket to receive on, defaults to nil. If the argument is nil:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre>
+</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.GetMessage">
+<short>Receive a message from the other side</short>
+<descr>
+<pre>This method is used to receive a message to the other side and input it into a user string.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.GetMessage.Result">
+<short>Returns the number of bytes received</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.GetMessage.msg">
+<short>The user message to receive into</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.GetMessage.aSocket">
+<short><pre>The socket to receive on, defaults to nil.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre></short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.Send">
+<short>Send data to the other side</short>
+<descr>
+<pre>This method is used to send data to the other side.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.Send.Result">
+<short>Returns the number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Send.aData">
+<short>The user data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Send.aSize">
+<short>The size of data to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.Send.aSocket">
+<short><pre>Socket to send the data on, defaults to nil.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre></short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.SendMessage">
+<short>Send a string message to the other side</short>
+<descr>
+<pre>This method is used to send a user string message to the other side.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre></descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.SendMessage.Result">
+<short>Returns the number of bytes sent</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.SendMessage.msg">
+<short>The user message to send</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLTcp.SendMessage.aSocket">
+<short><pre>The socket to send on, defaults to nil.
+If the socket argument is not specified:
+1. If the object is a client (connect was used), then it uses the only socket, and so the argument is useless anyhow.
+2. If the object is a server, the current iterator is used. This points to the first accepted connection socket if there is one, or the server socket (in which case Get will fail with 0 and OnError will get called).</pre></short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLTcp.IterNext">
+<short>Get the next iterator</short>
+<descr>
+This method is used to get Iterator to point to the next socket. This method is used to iterate all the sockets in given connection. It returns true if Iterator was moved to the next socket or false if there was no socket to move on. In case it returns false, the iterator is reset with IterReset automatically.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLTcp.IterNext.Result">
+<short>Returns true if there is a next socket, false otherwise (and resets the iterator)</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLTcp.IterReset">
+<short>Resets the socket iterator</short>
+<descr>
+This method is used to reset the socket iterator to the first socket. In case of client, this is the only socket. In case of server it now points to the listening server socket. You should use IterNext on server right after IterReset to get to the first connected socket! (the server one is just listening, for new connections)
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLTcp.CallAction">
+<short>Eventize the connection</short>
+<descr>
+This method is used to eventize the connection. It is used to find out events on all sockets and act upon them. It should be called periodicly depending on timeout.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLTcp.Disconnect">
+<short>Disconnects the connection</short>
+<descr>
+This method is used to gracefuly disconnect the TCP connection.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLTcp.Connecting">
+<short>Specifies connecting status</short>
+<descr>
+This property specifies the connecting status. It is true if a connection attempt is in progress.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLTcp.OnAccept">
+<short>Accept event callback</short>
+<descr>
+This callback is used to notify of a successful accept event on the given connection.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLTcp.OnConnect">
+<short>Connect event callback</short>
+<descr>
+This callback is used to notify of a successful connect event on the given connection.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lNet -->
+
+
+<!--
+  ====================================================================
+    lEvents
+  ====================================================================
+-->
+
+<module name="lEvents">
+<short>Event model abstraction unit</short>
+<descr>
+This is the unit implementing abstraction layer of the event models as well as all the event models themselves.
+</descr>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="Linux">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- unresolved type reference Visibility: default -->
+<element name="Contnrs">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLHandle">
+<short>Base abstraction of a handle or socket</short>
+<descr>
+This is the basic abstract class for a handle or socket which any eventer can use.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- object Visibility: default -->
+<element name="TLEventer">
+<short>Abstract class for all eventers</short>
+<descr>
+This is the abstract eventer class. All specific eventers need to implement this class.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLHandleEvent">
+<short>A generic event happening on any handle</short>
+<descr>
+This is a generic callback event used to report events happening on handles.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLHandleEvent.aHandle">
+<short>The handle on which an event occurred</short>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLHandleErrorEvent">
+<short>An error event callback</short>
+<descr>
+This is an error event callback. In case an error happens on a handle, this callback is triggered.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLHandleErrorEvent.aHandle">
+<short>The handle on which an error occurred</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLHandleErrorEvent.msg">
+<short>The error message containing description of the error</short>
+</element>
+
+<!-- procedure type Visibility: default -->
+<element name="TLEventerErrorEvent">
+<short>Eventer error callback</short>
+<descr>
+This callback is triggered if an error in the eventer happens.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventerErrorEvent.msg">
+<short>Message containing the description of the error</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventerErrorEvent.Sender">
+<short>Sender is the eventer on which the error occurred</short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TLHandle.UserData">
+<short>User defined data</short>
+<descr>
+This pointer can be used to store user data into a handle. This data is not touched by the library so it remains constant over operations. It can be used as a means to "tie" sockets or handles to their owners differently than by TLComponent.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLHandle.Create">
+<short>Standard constructor for the handle</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TLHandle.Destroy">
+<short>Standard destructor for the handle</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLHandle.Free">
+<short>Free method overriden from TObject</short>
+<descr>
+This is a little trick used to ensure memory is always freed properly with handles. 
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.Prev">
+<short>Returns the previous handle in double linked list</short>
+<descr>
+This returns the previous handle in a DLL if there is any. Used by eventers.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.Next">
+<short>Returns next handle in double linked list</short>
+<descr>
+This returns the next handle in a DLL if there is any. Used by eventers.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.FreeNext">
+<short>Demotes next handle for freeing</short>
+<descr>
+This is used by eventers to free appropriate handles from their lists.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.IgnoreWrite">
+<short>Event control property for write events</short>
+<descr>
+This property can be set to true if one wishes to ignore write associated events to not be checked for in the eventer for this specific handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.IgnoreRead">
+<short>Event control property for read events</short>
+<descr>
+This property can be set to true if one wishes to ignore read associated events to not be checked for in the eventer for this specific handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.IgnoreError">
+<short>Event control property for error events</short>
+<descr>
+This property can be set to true if one wishes to ignore error associated events to not be checked for in the eventer for this specific handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.OnRead">
+<short>Read notification callback</short>
+<descr>
+This callback is triggered when a read event occurs on the given handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.OnWrite">
+<short>Write notification callback</short>
+<descr>
+This callback is triggered when a write event occurs on the given handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.OnError">
+<short>Error notification callback</short>
+<descr>
+This callback is triggered when an error event occurs on the given handle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.Dispose">
+<short>Dispose status notifier</short>
+<descr>
+This property is used by the eventers no set status of the handle as "to be disposed of". A handle with dispose flag shouldn't be manipulated.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.Handle">
+<short>The handle of the handle</short>
+<descr>
+This is the OS specific low level handle of the TLHandle.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLHandle.Eventer">
+<short>Eventer of the handle</short>
+<descr>
+This is the eventer which controls and owns the given handle. Can be nil.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TLEventer.Create">
+<short>Standard constructor for eventer</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TLEventer.Destroy">
+<short>Standard destructor for eventer</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLEventer.AddHandle">
+<short>Add new handle to the eventer</short>
+<descr>
+This method adds a new handle to the eventer. After this call, the handle will be controled and owned by this eventer. One handle should not be in more than one eventer at a time.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLEventer.AddHandle.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventer.AddHandle.aHandle">
+<short>The handle to be added</short>
+</element>
+
+<!-- function Visibility: public -->
+<element name="TLEventer.CallAction">
+<short>Eventizes the eventer</short>
+<descr>
+This method is the heart of the eventer. It ensures activity. Once called, all handles are checked for events and callbacks are issued. Depending on timeout this method will block or not (if timeout is > 0 it will block for that time or until an event occurs on any handle, if timeout is -1, it will block until an event happens).
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLEventer.CallAction.Result">
+<short>Returns true on success</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.RemoveHandle">
+<short>Remove a handle from the eventer</short>
+<descr>
+This method removes and free a handle from the eventer. The handle must be present in the eventer already.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventer.RemoveHandle.aHandle">
+<short>The handle to be removed</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.UnplugHandle">
+<short>Unplug a handle from the eventer</short>
+<descr>
+This method removes a handle from the eventer, but unlike RemoveHandle() does not free it. The handle must be already in the eventer.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventer.UnplugHandle.aHandle">
+<short>The handle to be unplugged</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.LoadFromEventer">
+<short>Shortcut init</short>
+<descr>
+This is a initialization method used to get all the data from another eventer into this one. It can be used to "switch" eventers runtime. Users should be careful however, as this method isn't "safe". The handles are owned by two eventers as a result of this method. One of the eventers should unplug (not remove) all it's handles and only be freed after that.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TLEventer.LoadFromEventer.aEventer">
+<short>The eventer to load from</short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.Clear">
+<short>Clear all handles</short>
+<descr>
+This method clears all handles from the eventer freeing them.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.AddRef">
+<short>Adds a reference to the eventer</short>
+<descr>
+This method is used by protocols to keep track of references to the eventers. If more than one protocol connections have the same eventer, this is used to ensure that the eventer is freed only when the last protocol connection is freed.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TLEventer.DeleteRef">
+<short>Deletes a reference to the eventer</short>
+<descr>
+This method is used by protocols to keep track of references to the eventers. If more than one protocol connections have the same eventer, this is used to ensure that the eventer is freed only when the last protocol connection is freed.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLEventer.Timeout">
+<short>Callaction timeout</short>
+<descr>
+This property specifies how much can the connection block on the CallAction call. Default is 0 which means don't block. If any positive number is given, CallAction will block that number of milliseconds or less if an event occurred. If -1 is given, CallAction will block until an event happens.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLEventer.OnError">
+<short>Error event callback</short>
+<descr>
+This callback is triggered if an error in the eventer happens.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TLEventer.Count">
+<short>Number of handles in eventer</short>
+<descr>
+This property specifies the number of handles an eventer has.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- "class of" type Visibility: default -->
+<element name="TLEventerClass">
+<short>Metaclass of an eventer</short>
+<descr>
+This is the generic metaclass of an eventer.
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TLEpollEventer.CallAction.Result">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="BestEventerClass">
+<short>Returns best eventer metaclass</short>
+<descr>
+This method is used to get the class of the best possible eventer on given combination of architecture and operating system version. For example on Linux 2.4 it would return TLSelectEventer, however the same binary on Linux 2.6 would return TLEpollEventer. It is runtime based.
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="BestEventerClass.Result">
+<short>Returns the best possible eventer metaclass on given Architecture/OS/Version</short>
+</element>
+
+</module> <!-- lEvents -->
+
+</package>
+</fpdoc-descriptions>

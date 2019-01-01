@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en-gb">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <title>Lightweight Networking Unit</title>
+  <meta content="Ales Katona" name="author">
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body style="width: 723px; direction: ltr;">
+  This site is now obsolete, please point your links to:
+  <a href="http://lnet.wordpress.com">http://lnet.wordpress.com</a>
+</body>
+</html>

@@ -1,0 +1,430 @@
+object MainForm: TMainForm
+  Left = 342
+  Height = 468
+  Top = 202
+  Width = 471
+  HorzScrollBar.Page = 470
+  VertScrollBar.Page = 447
+  ActiveControl = EditFrom
+  Caption = 'SMTP Client Test'
+  ClientHeight = 445
+  ClientWidth = 471
+  Constraints.MinHeight = 468
+  Constraints.MinWidth = 471
+  Menu = MainMenu
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '0.9.31'
+  object SB: TStatusBar
+    Left = 0
+    Height = 17
+    Top = 428
+    Width = 471
+    Panels = <>
+  end
+  object ButtonSend: TButton
+    Left = 0
+    Height = 24
+    Top = 384
+    Width = 471
+    Align = alBottom
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Send'
+    Enabled = False
+    OnClick = ButtonSendClick
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 144
+    Top = 0
+    Width = 471
+    Align = alTop
+    ClientHeight = 144
+    ClientWidth = 471
+    TabOrder = 1
+    object GBEmail: TGroupBox
+      Left = 248
+      Height = 139
+      Top = 0
+      Width = 212
+      Caption = 'e-mail'
+      ClientHeight = 114
+      ClientWidth = 192
+      TabOrder = 0
+      object LabelFrom: TLabel
+        Left = 6
+        Height = 18
+        Top = 10
+        Width = 25
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'From:'
+        ParentColor = False
+      end
+      object LabelTo: TLabel
+        Left = 6
+        Height = 18
+        Top = 38
+        Width = 20
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'To:'
+        ParentColor = False
+      end
+      object LabelSubject: TLabel
+        Left = 6
+        Height = 18
+        Top = 63
+        Width = 33
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Subject:'
+        ParentColor = False
+      end
+      object EditFrom: TEdit
+        Left = 62
+        Height = 23
+        Top = 7
+        Width = 115
+        Anchors = [akTop, akLeft, akRight]
+        OnKeyPress = EditFromKeyPress
+        TabOrder = 0
+      end
+      object EditTo: TEdit
+        Left = 62
+        Height = 23
+        Top = 35
+        Width = 115
+        Anchors = [akTop, akLeft, akRight]
+        OnKeyPress = EditFromKeyPress
+        TabOrder = 1
+      end
+      object EditSubject: TEdit
+        Left = 62
+        Height = 23
+        Top = 60
+        Width = 115
+        Anchors = [akTop, akLeft, akRight]
+        OnKeyPress = EditFromKeyPress
+        TabOrder = 2
+      end
+    end
+    object GBConnection: TGroupBox
+      Left = 8
+      Height = 139
+      Top = 0
+      Width = 228
+      Caption = 'Connection'
+      ClientHeight = 114
+      ClientWidth = 208
+      TabOrder = 1
+      object LabelServer: TLabel
+        Left = 6
+        Height = 18
+        Top = 12
+        Width = 36
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Server:'
+        ParentColor = False
+      end
+      object LabelPort: TLabel
+        Left = 6
+        Height = 18
+        Top = 38
+        Width = 36
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Port:'
+        ParentColor = False
+      end
+      object EditServer: TEdit
+        Left = 70
+        Height = 23
+        Top = 8
+        Width = 124
+        Anchors = [akTop, akLeft, akRight]
+        OnKeyPress = EditServerKeyPress
+        TabOrder = 0
+      end
+      object EditPort: TEdit
+        Left = 70
+        Height = 23
+        Top = 36
+        Width = 32
+        Anchors = [akTop, akLeft, akRight]
+        OnKeyPress = EditServerKeyPress
+        TabOrder = 1
+        Text = '25'
+      end
+      object ButtonConnect: TButton
+        Left = 6
+        Height = 24
+        Top = 72
+        Width = 96
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Connect'
+        OnClick = ButtonConnectClick
+        TabOrder = 2
+      end
+      object CheckBoxSSL: TCheckBox
+        Left = 126
+        Height = 19
+        Top = 38
+        Width = 80
+        Caption = 'Use SSL'
+        OnChange = CheckBoxSSLChange
+        TabOrder = 3
+      end
+      object ButtonTLS: TButton
+        Left = 126
+        Height = 24
+        Top = 72
+        Width = 84
+        Caption = 'Start TLS'
+        OnClick = ButtonTLSClick
+        TabOrder = 4
+        Visible = False
+      end
+      object ButtonAuth: TButton
+        Left = 6
+        Height = 24
+        Top = 96
+        Width = 112
+        Caption = 'Authenticate'
+        OnClick = ButtonAuthClick
+        TabOrder = 5
+        Visible = False
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 240
+    Top = 144
+    Width = 471
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 240
+    ClientWidth = 471
+    TabOrder = 2
+    object LabelAtt: TLabel
+      Left = 8
+      Height = 18
+      Top = 151
+      Width = 97
+      Anchors = [akLeft, akBottom]
+      Caption = 'Attachments:'
+      ParentColor = False
+    end
+    object MemoText: TMemo
+      Left = 1
+      Height = 149
+      Hint = 'Message text'
+      Top = 1
+      Width = 469
+      Align = alTop
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.CharSet = 4
+      ParentFont = False
+      TabOrder = 0
+    end
+    object ListBoxAttachments: TListBox
+      Left = 1
+      Height = 65
+      Hint = 'Attachments'
+      Top = 174
+      Width = 469
+      Align = alBottom
+      ItemHeight = 0
+      OnDblClick = MenuItemAddClick
+      ParentShowHint = False
+      PopupMenu = PopupMenuAttachments
+      ShowHint = True
+      TabOrder = 1
+      TopIndex = -1
+    end
+  end
+  object ProgressBar: TProgressBar
+    Left = 0
+    Height = 20
+    Top = 408
+    Width = 471
+    Align = alBottom
+    Step = 1
+    TabOrder = 4
+  end
+  object SMTP: TLSMTPClientComponent
+    OnConnect = SMTPConnect
+    OnReceive = SMTPReceive
+    OnDisconnect = SMTPDisconnect
+    OnError = SMTPError
+    OnSent = SMTPSent
+    OnSuccess = SMTPSuccess
+    OnFailure = SMTPFailure
+    StatusSet = [ssCon, ssEhlo, ssAuthLogin, ssAuthPlain, ssData, ssQuit]
+    PipeLine = False
+    Timeout = 0
+    Session = SSLSession
+    left = 393
+    top = 248
+  end
+  object MainMenu: TMainMenu
+    left = 393
+    top = 216
+    object MenuItemFile: TMenuItem
+      Caption = '&File'
+      object MenuItemExit: TMenuItem
+        Caption = 'E&xit'
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000064000000640000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00000000000000000000377CA9FF0B4D7EFF135C92FF0C578EFF999999FF7171
+          71FF545454FF515151FF4F4F4FFF4C4C4CFF4A4A4AFF474747FF454545FF2567
+          9DFF3274A8FF3D7CAFFF4784B5FF4E8ABAFF3E7EADFF0D578EFF000000000105
+          1100585858FFA2A2A2FFA2A2A2FFA3A3A3FFA4A4A4FFA4A4A4FFA5A5A5FF2F6F
+          A5FF78ABD2FF78ABD3FF73A7D1FF69A0CDFF407FAEFF0F5990FF000000000212
+          37005C5C5CFFA1A1A1FF3C7340FFA0A1A1FFA3A3A3FFA3A3A3FFA4A4A4FF3674
+          AAFF7DAFD4FF5B9AC9FF5495C7FF5896C8FF4180AEFF125B93FF000000000000
+          0000606060FFA0A0A0FF3D7641FF367139FFA2A2A2FFA2A2A2FFA3A3A3FF3D79
+          B0FF82B3D7FF629FCCFF5A9AC9FF5E9BCAFF4381AFFF1B6198FF37823EFF347E
+          3BFF317937FF2E7534FF499150FF468F4CFF39733DFFA1A1A1FFA2A2A2FF457E
+          B4FF88B7D9FF67A3CFFF619ECCFF639FCCFF4583B1FF1E649BFF3B8742FF89CB
+          92FF84C88DFF80C688FF7BC383FF77C17FFF478F4DFF3B743FFFA1A1A1FF4C84
+          BAFF8DBBDBFF6EA8D1FF66A6D1FF5FB4DFFF4785B1FF2568A0FF3E8B46FF8FCE
+          99FF7DC687FF78C381FF73C07CFF74C07CFF79C281FF49904FFF547F57FF5489
+          BFFF94BFDDFF75ADD4FF63B8E1FF4BD4FFFF428BB8FF2B6DA5FF41904AFF94D2
+          9FFF91D09AFF8DCD96FF89CB92FF84C88DFF519858FF417C46FF9F9F9FFF5A8E
+          C4FF98C3E0FF7CB3D7FF74AFD6FF5EC4EDFF4B88B3FF3473AAFF44944DFF4291
+          4BFF3F8D48FF3D8945FF5DA465FF5AA061FF45834BFF9E9E9EFF9E9E9EFF6092
+          C9FF9EC7E2FF83B8DAFF7DB4D7FF7EB3D7FF4F89B4FF3A78AFFF000000000000
+          0000777777FF9A9A9AFF3D8A45FF498A4FFF9C9C9CFF9D9D9DFF9D9D9DFF6696
+          CCFFA2CBE3FF89BDDCFF83B9DAFF84B9DAFF518BB5FF427EB5FF000000000117
+          1D007A7A7AFF999999FF529159FF999A99FF9B9B9BFF9C9C9CFF9C9C9CFF6C9A
+          D0FFA7CEE5FF8FC1DFFF89BDDCFF8BBDDCFF538DB6FF4B83BBFF000000000281
+          9B007D7D7DFF999999FF999999FF9A9A9AFF9A9A9AFF9B9B9BFF9B9B9BFF6F9D
+          D3FFAAD1E7FFABD1E7FF98C7E1FF91C2DEFF568FB7FF5188C0FF000000000007
+          0800808080FF7E7E7EFF7C7C7CFF7A7A7AFF777777FF757575FF727272FF719E
+          D4FF6F9ED6FF87B2DCFFABD3E8FFA9D0E6FF5890B8FF5A8EC7FF000000000000
+          000000070800026E790000040400000000000000000000000000000000000000
+          0000000000006E9BD2FF6D9CD4FF85B1DAFF5A91B9FF5F92C9FF000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000567BA7FF6A9AD2FF6596CEFF
+        }
+        OnClick = MenuItemExitClick
+      end
+    end
+    object MenuItemHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemLogs: TMenuItem
+        Caption = 'Log/Features'
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000064000000640000000000000000000000000000000000
+          000000000000858A88FF888D8BFF888D8BFF888D8BFF888D8BFF888D8BFF888D
+          8BFF888D8BFF888D8BFF888D8BFF888D8BFF888D8BFF8C8E8DFF000000000000
+          000001041100858A88FFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFE
+          FEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFFFFFFFF888D8BFF000000000105
+          11000138CB0004733AFFF3F4F4FFF2F3F3FFF1F2F2FFF0F1F1FFF0F0F0FFECEC
+          ECFFEBEBEBFFEAEAEAFFE9E9E9FFEBECECFFFEFEFEFF888D8BFF000000000212
+          3700014FF40022AD65FF04733AFFF4F4F4FFF3F3F3FFF2F3F3FFF1F2F2FF0000
+          FFFF0000FFFF0000FFFF0000FFFFEAEAEAFFFEFEFEFF888D8BFF000000000000
+          0000021A450022AD65FF22AD65FF04733AFFF4F5F5FFF3F4F4FFF2F3F3FFF2F2
+          F2FFF1F1F1FFF0F0F0FFEFF0F0FFEEEFEFFFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF22AD65FF22AD65FF22AD65FF22AD65FF04733AFFF2F3F3FFF1F2F2FFF0F1
+          F1FFEFF0F0FFEEEFEFFFEDEEEEFFF0F0F0FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF22AD65FF22AD65FF22AD65FF22AD65FF22AD65FF04733AFF0000FFFF0000
+          FFFF0000FFFF0000FFFF0000FFFFF1F2F2FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF22AD65FF22AD65FF22AD65FF22AD65FF04733AFFF7F8F8FFF7F8F8FFF6F7
+          F7FFF5F6F6FFF4F5F5FFF3F4F4FFF3F3F3FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF0000000022AD65FF22AD65FF04733AFFF7F8F8FFF7F8F8FFF4F5F5FFF4F5
+          F5FFF4F5F5FFF3F4F4FFF2F3F3FFF4F5F5FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF0000000022AD65FF04733AFFF7F8F8FFF7F8F8FFF7F8F8FF0000FFFF0000
+          FFFF0000FFFF0000FFFF0000FFFFF2F3F3FFFEFEFEFF888D8BFF000000000000
+          00000112180004733AFFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8
+          F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF01A7D700858A88FFF7F8F8FFF7F8F8FFF4F5F5FFF4F5F5FFF4F5F5FFF4F5
+          F5FFF4F5F5FFF4F5F5FFF4F5F5FFF7F8F8FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF00D3FF00858A88FFF7F8F8FFF7F8F8FF0000FFFF0000FFFF0000FFFF0000
+          FFFF0000FFFF0000FFFF0000FFFFF4F5F5FFFEFEFEFF888D8BFF000000000007
+          080001A1B800858A88FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8
+          F8FFF7F8F8FFF7F8F8FFF7F8F8FFF7F8F8FFFEFEFEFF888D8BFF22AD65FF22AD
+          65FF00070800858A88FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF888D8BFF22AD65FF22AD
+          65FF00000000858A88FF858A88FF858A88FF858A88FF858A88FF858A88FF858A
+          88FF858A88FF858A88FF858A88FF858A88FF858A88FF8C8E8DFF
+        }
+        OnClick = MenuItemLogsClick
+      end
+      object MenuItemAbout: TMenuItem
+        Caption = '&About'
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000064000000640000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00000104110002196C0000000000000000008F5033FF8A5034FF884F34FF874F
+          34FF000000000000000002116C00010311000000000000000000000000000105
+          11000138CB000041FF00985534FFB28057FFD5B793FFDBC3A6FFDAC3A6FFD2B4
+          90FFAB7A52FF854E34FF002EFF000125CB000104110000000000000000000212
+          3700014FF4009F5433FFCBA77DFFD8BB9FFFC39C77FFB68A62FFB48660FFBE96
+          72FFD1B397FFC5A377FF844F35FF0139F400020C370000000000000000000000
+          0000AB6935FFCFAA81FFDABCA2FFBE9166FFBA8C62FFB7895FFFB3845EFFB183
+          5DFFB0835CFFCDAA8DFFC6A579FF885134FF000000000000000031313100A8A8
+          A800BF915EFFE0C2A8FFC5966CFFC29169FFE1CBB8FFFEFDFCFFFFFFFEFFEADC
+          D0FFB4855EFFB3855EFFD4B599FFAE7B56FFA9A9A9002A2A2A0053535300B87B
+          34FFDBBC9CFFD5AD89FFC7986CFFC39569FFC19367FFEDDFD3FFFAF7F4FFBB8B
+          63FFB98A63FFB88A62FFC59D78FFD2B893FF915534FF0000000049494900BE7E
+          35FFE3C7AFFFD0A276FFC5996BFFC4976AFFC49669FFEEE0D4FFFBF7F4FFBF90
+          66FFBE8F65FFBE8F64FFBE9269FFDFC6AAFF925034FF2828280000000000C585
+          3BFFE4C9B0FFD0A37AFFCC9D71FFC79A6CFFC5986BFFFFFFFFFFFFFFFEFFC396
+          69FFC19468FFC29468FFC3986DFFDFC5ABFF955334FF0000000000000000CB90
+          45FFE0BC9FFFDBB393FFCFA075FFCD9E72FFCB9C71FFDDBFA3FFDDBFA2FFC599
+          6BFFC5996BFFC4986BFFD1AB85FFD8BA97FF9D5934FF00000000000000000000
+          0000CD9C68FFE7CBB4FFD4A57AFFD0A077FFCF9E74FFFBF8F5FFFBF8F5FFCB9E
+          71FFCB9D71FFCDA177FFDFC0A5FFB98A5BFF0000000000000000000000000117
+          1D00CE8F49FFD9B28CFFE6CAB3FFD6A97DFFD1A579FFE2C4A8FFE1C3A8FFD0A2
+          76FFD1A477FFDDBDA2FFD0AC85FFAC6837FF01141D0000000000000000000281
+          9B0000D3FF00CF8D47FFD9B28CFFE6CDB8FFE0BA9DFFD7AB85FFD6A982FFD9B3
+          91FFE1C2ABFFD4AE86FFB16B36FF00BBFF0002719B0000000000000000000007
+          080001A1B80000DFFF00D2924BFFD0A06AFFE0BFA0FFE3C5AEFFE3C5AEFFDFBC
+          9FFFC89762FFBD7E37FF00CCFF000191B8000006080000000000000000000000
+          000000070800026E79000004040000000000D2934FFFCD8C46FFCB8B41FFCA8D
+          44FF000000000004040002677900000708000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000
+        }
+        OnClick = MenuItemAboutClick
+      end
+    end
+  end
+  object TimerQuit: TTimer
+    Enabled = False
+    OnTimer = TimerQuitTimer
+    left = 393
+    top = 184
+  end
+  object PopupMenuAttachments: TPopupMenu
+    left = 360
+    top = 216
+    object MenuItemAdd: TMenuItem
+      Caption = 'Add'
+      OnClick = MenuItemAddClick
+    end
+    object MenuItemDelete: TMenuItem
+      Caption = 'Delete'
+      OnClick = MenuItemDeleteClick
+    end
+  end
+  object OD: TOpenDialog
+    FilterIndex = 0
+    left = 360
+    top = 184
+  end
+  object SSLSession: TLSSLSessionComponent
+    Method = msSSLv2or3
+    SSLActive = False
+    OnSSLConnect = SSLSessionSSLConnect
+    left = 360
+    top = 248
+  end
+end
