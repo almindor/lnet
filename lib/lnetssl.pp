@@ -509,12 +509,15 @@ begin
     Exit;
 
   case FMethod of
-    // msSslTLS   : aMethod := SslTLSMethod; // DEPRECATED
+    msSslTLS   : aMethod := SslMethodTLSV1_2; // DEPRECATED
     msSSLv2or3 : aMethod := SslMethodV23;
     msSSLv2    : aMethod := SslMethodV2;
     msSSLv3    : aMethod := SslMethodV3;
     msTLSv1    : aMethod := SslMethodTLSV1;
   end;
+
+  if not Assigned(aMethod) then
+    raise Exception.Create('Unsupported SSL method');
 
   FSSLContext := SSLCTXNew(aMethod);
   if not Assigned(FSSLContext) then
