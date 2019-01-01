@@ -216,7 +216,7 @@ begin
   if ssSSLActive in FSocketState then
     Result := Assigned(FSSL) and (FSSLStatus = slNone)
   else
-    Result := inherited;
+    Result := FConnectionStatus = scConnected;
 end;
 
 function TLSSLSocket.GetConnectionStatus: TLSocketConnectionStatus;

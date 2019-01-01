@@ -98,7 +98,7 @@ begin
     FWorkThread[i] := TLWorkThread.Create(True);
     FWorkThread[i].FEventer := aEventerClass.Create;
     FWorkThread[i].FEventer.Timeout := FTimeout;
-    FWorkThread[i].Resume;
+    FWorkThread[i].Start;
   end;
   
   FThreadsCreated := True;
