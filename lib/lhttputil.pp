@@ -174,7 +174,7 @@ begin
   { month }
   lMonth := 1;
   repeat
-    if CompareMem(ADateStr, @ShortMonthNames[lMonth][1], 3) then break;
+    if CompareMem(ADateStr, @DefaultFormatSettings.ShortMonthNames[lMonth][1], 3) then break;
     inc(lMonth);
     if lMonth = 13 then exit(false);
   until false;
