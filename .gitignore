@@ -2,6 +2,7 @@
 **/*.ppu
 **/*.o
 **/*.bak
+**/*.exe
 
 examples/console/lftp/lftpclient
 examples/console/lhttp/fpget
