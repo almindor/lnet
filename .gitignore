@@ -3,6 +3,12 @@
 **/*.o
 **/*.bak
 **/*.exe
+**/*.or
+**/*.compiled
+**/*.dbg
+**/backup
+**/*.lrs
+**/*.lps
 
 examples/console/lftp/lftpclient
 examples/console/lhttp/fpget
@@ -12,3 +18,6 @@ examples/console/ltcp/lclient
 examples/console/ltcp/lserver
 examples/console/ltelnet/ltclient
 examples/console/ludp/ludp
+
+examples/visual/http/httpclienttest
+examples/visual/telnet/telnet
