@@ -2,3 +2,12 @@
 **/*.ppu
 **/*.o
 **/*.bak
+
+examples/console/lftp/lftpclient
+examples/console/lhttp/fpget
+examples/console/lhttp/fphttpd
+examples/console/lsmtp/lsmtpclient
+examples/console/ltcp/lclient
+examples/console/ltcp/lserver
+examples/console/ltelnet/ltclient
+examples/console/ludp/ludp
