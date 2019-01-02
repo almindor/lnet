@@ -1242,9 +1242,9 @@ begin
   if FSocketNet = LAF_INET6 then
     n := Pos(':', Address)  // IPv4
   else
-    n := Pos(']:', Address); // IPv6
+    n := Pos(']:', Address) + 1; // IPv6
 
-  if n > 0 then begin
+  if n > 1 then begin
     s := Copy(Address, 1, n-1);
     p := Word(StrToInt(Copy(Address, n+1, Length(Address))));
 
