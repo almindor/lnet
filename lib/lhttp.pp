@@ -37,10 +37,11 @@ type
   TLHTTPParameter = (hpConnection, hpContentLength, hpContentType,
     hpAccept, hpAcceptCharset, hpAcceptEncoding, hpAcceptLanguage, hpHost,
     hpFrom, hpReferer, hpUserAgent, hpRange, hpTransferEncoding,
-    hpIfModifiedSince, hpIfUnmodifiedSince, hpCookie, hpXRequestedWith);
+    hpIfModifiedSince, hpIfUnmodifiedSince, hpCookie, hpXRequestedWith,
+    hpAuthorization);
   TLHTTPStatus = (hsUnknown, hsOK, hsNoContent, hsPartialContent,
     hsMovedPermanently, hsFound, hsNotModified,
-    hsBadRequest, hsForbidden, hsNotFound, hsPreconditionFailed, hsRequestTooLong,
+    hsBadRequest, hsUnauthorized, hsForbidden, hsNotFound, hsPreconditionFailed, hsRequestTooLong,
     hsInternalError, hsNotImplemented, hsNotAllowed);
   TLHTTPTransferEncoding = (teIdentity, teChunked);
   TLHTTPClientError = (ceNone, ceMalformedStatusLine, ceVersionNotSupported,
@@ -55,12 +56,13 @@ const
     ('CONNECTION', 'CONTENT-LENGTH', 'CONTENT-TYPE', 'ACCEPT', 
      'ACCEPT-CHARSET', 'ACCEPT-ENCODING', 'ACCEPT-LANGUAGE', 'HOST',
      'FROM', 'REFERER', 'USER-AGENT', 'RANGE', 'TRANSFER-ENCODING',
-     'IF-MODIFIED-SINCE', 'IF-UNMODIFIED-SINCE', 'COOKIE', 'X-REQUESTED-WITH');
+     'IF-MODIFIED-SINCE', 'IF-UNMODIFIED-SINCE', 'COOKIE', 'X-REQUESTED-WITH',
+     'AUTHORIZATION');
   HTTPStatusCodes: array[TLHTTPStatus] of dword =
-    (0, 200, 204, 206, 301, 302, 304, 400, 403, 404, 412, 414, 500, 501, 405);
+    (0, 200, 204, 206, 301, 302, 304, 400, 401, 403, 404, 412, 414, 500, 501, 405);
   HTTPTexts: array[TLHTTPStatus] of string =
     ('', 'OK', 'No Content', 'Partial Content', 'Moved Permanently', 'Found',
-     'Not Modified', 'Bad Request', 'Forbidden',
+     'Unauthorized', 'Not Modified', 'Bad Request', 'Forbidden',
      'Not Found', 'Precondition Failed', 'Request Too Long', 'Internal Error',
      'Method Not Implemented', 'Method Not Allowed');
   HTTPDescriptions: array[TLHTTPStatus] of string = (
@@ -82,6 +84,11 @@ const
     '<html><head><title>400 Bad Request</title></head><body>'+#10+
     '<h1>Bad Request</h1>'+#10+
     '<p>Your browser did a request this server did not understand.</p>'+#10+
+    '</body></html>'+#10,
+      { hsUnauthorized }
+    '<html><head><title>401 Unauthorized</title></head><body>'+#10+
+    '<h1>Unauthorized</h1>'+#10+
+    '<p>You must provide valid credentials to access this resource.</p>'+#10+
     '</body></html>'+#10,
       { hsForbidden }
     '<html><head><title>403 Forbidden</title></head><body>'+#10+
