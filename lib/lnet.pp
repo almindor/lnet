@@ -1277,10 +1277,15 @@ end;
 
 procedure TLUdp.ErrorAction(aSocket: TLHandle; const msg: string);
 begin
-  if Assigned(FSession) then
-    FSession.ErrorEvent(aSocket, msg)
+  if aSocket = FRootSock then
+    Bail(msg)
   else
-    ErrorEvent(aSocket, msg);
+  begin
+    if Assigned(FSession) then
+      FSession.ErrorEvent(aSocket, msg)
+    else
+      ErrorEvent(aSocket, msg);
+  end;
 end;
 
 function TLUdp.IterNext: Boolean;
@@ -1302,7 +1307,7 @@ function TLUdp.GetConnected: Boolean;
 begin
   Result := False;
   if Assigned(FRootSock) then
-  Result := FRootSock.ConnectionStatus = scConnected;
+    Result := FRootSock.ConnectionStatus = scConnected;
 end;
 
 function TLUdp.Get(out aData; const aSize: Integer; aSocket: TLSocket): Integer;
