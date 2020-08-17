@@ -62,7 +62,7 @@ const
     (0, 200, 204, 206, 301, 302, 304, 400, 401, 403, 404, 412, 414, 500, 501, 405);
   HTTPTexts: array[TLHTTPStatus] of string =
     ('', 'OK', 'No Content', 'Partial Content', 'Moved Permanently', 'Found',
-     'Unauthorized', 'Not Modified', 'Bad Request', 'Forbidden',
+     'Not Modified', 'Bad Request', 'Unauthorized', 'Forbidden',
      'Not Found', 'Precondition Failed', 'Request Too Long', 'Internal Error',
      'Method Not Implemented', 'Method Not Allowed');
   HTTPDescriptions: array[TLHTTPStatus] of string = (
