@@ -1239,7 +1239,7 @@ var
   s: string;
   p: Word;
 begin
-  if FSocketNet = LAF_INET6 then
+  if FSocketNet <> LAF_INET6 then
     n := Pos(':', Address)  // IPv4
   else
     n := Pos(']:', Address) + 1; // IPv6
