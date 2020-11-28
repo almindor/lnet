@@ -209,7 +209,7 @@ var
 begin
   { lInfo.Bias is in minutes }
   if Windows.GetTimeZoneInformation(@lInfo) <> $FFFFFFFF then
-    Result := lInfo.Bias * 60
+    Result := -lInfo.Bias * 60
   else
     Result := 0;
 end;
