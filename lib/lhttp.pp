@@ -32,7 +32,7 @@ uses
   classes, sysutils, lnet, lnetssl, levents, lhttputil, lstrbuffer;
 
 type
-  TLHTTPMethod = (hmHead, hmGet, hmPost, hmDelete, hmUnknown);
+  TLHTTPMethod = (hmHead, hmGet, hmPost, hmDelete, hmUnknown, hmPut);
   TLHTTPMethods = set of TLHTTPMethod;
   TLHTTPParameter = (hpConnection, hpContentLength, hpContentType,
     hpAccept, hpAcceptCharset, hpAcceptEncoding, hpAcceptLanguage, hpHost,
@@ -51,7 +51,7 @@ const
   HTTPDisconnectStatuses = [hsBadRequest, hsRequestTooLong, hsForbidden, 
     hsInternalError, hsNotAllowed];
   HTTPMethodStrings: array[TLHTTPMethod] of string =
-    ('HEAD', 'GET', 'POST', 'DELETE', '');
+    ('HEAD', 'GET', 'POST', 'DELETE', '', 'PUT');
   HTTPParameterStrings: array[TLHTTPParameter] of string =
     ('CONNECTION', 'CONTENT-LENGTH', 'CONTENT-TYPE', 'ACCEPT', 
      'ACCEPT-CHARSET', 'ACCEPT-ENCODING', 'ACCEPT-LANGUAGE', 'HOST',
@@ -585,7 +585,7 @@ end;
 
 constructor TURIHandler.Create;
 begin
-  FMethods := [hmHead, hmGet, hmPost, hmDelete];
+  FMethods := [hmHead, hmGet, hmPost, hmDelete, hmPut];
 end;
 
 procedure TURIHandler.RegisterWithEventer(AEventer: TLEventer);
@@ -603,7 +603,7 @@ end;
 destructor TOutputItem.Destroy;
 begin
   if FSocket.FCurrentInput = Self then begin
-    FSocket.FCurrentInput := nil;
+    FreeAndNil(FSocket.FCurrentInput);
   end;
     
   if FPrevDelayFree = nil then
