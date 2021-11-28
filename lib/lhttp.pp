@@ -585,7 +585,7 @@ end;
 
 constructor TURIHandler.Create;
 begin
-  FMethods := [hmHead, hmGet, hmPost, hmDelete, hmPut];
+  FMethods := [hmHead, hmGet, hmPost, hmDelete, hmPut, hmPatch];
 end;
 
 procedure TURIHandler.RegisterWithEventer(AEventer: TLEventer);
