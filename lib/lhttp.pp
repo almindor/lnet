@@ -32,7 +32,7 @@ uses
   classes, sysutils, lnet, lnetssl, levents, lhttputil, lstrbuffer;
 
 type
-  TLHTTPMethod = (hmHead, hmGet, hmPost, hmDelete, hmUnknown, hmPut, hmPatch);
+  TLHTTPMethod = (hmHead, hmGet, hmPost, hmDelete, hmUnknown, hmPut, hmPatch, hmOptions);
   TLHTTPMethods = set of TLHTTPMethod;
   TLHTTPParameter = (hpConnection, hpContentLength, hpContentType,
     hpAccept, hpAcceptCharset, hpAcceptEncoding, hpAcceptLanguage, hpHost,
@@ -51,7 +51,7 @@ const
   HTTPDisconnectStatuses = [hsBadRequest, hsRequestTooLong, hsForbidden,
     hsInternalError, hsNotAllowed];
   HTTPMethodStrings: array[TLHTTPMethod] of string =
-    ('HEAD', 'GET', 'POST', 'DELETE', '', 'PUT', 'PATCH');
+    ('HEAD', 'GET', 'POST', 'DELETE', '', 'PUT', 'PATCH', 'OPTIONS');
   HTTPParameterStrings: array[TLHTTPParameter] of string =
     ('CONNECTION', 'CONTENT-LENGTH', 'CONTENT-TYPE', 'ACCEPT',
      'ACCEPT-CHARSET', 'ACCEPT-ENCODING', 'ACCEPT-LANGUAGE', 'HOST',
@@ -585,7 +585,7 @@ end;
 
 constructor TURIHandler.Create;
 begin
-  FMethods := [hmHead, hmGet, hmPost, hmDelete, hmPut, hmPatch];
+  FMethods := [hmHead, hmGet, hmPost, hmDelete, hmPut, hmPatch, hmOptions];
 end;
 
 procedure TURIHandler.RegisterWithEventer(AEventer: TLEventer);
