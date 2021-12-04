@@ -603,6 +603,8 @@ var
   end;
 
 begin
+  lCode := 0;
+  lIntVal := 0;
   repeat
     lBufferPtr := FBufferPos;
     Inc(lBufferPtr, GetFastCGIStringSize(PByte(lBufferPtr), lNameLen));
