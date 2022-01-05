@@ -479,7 +479,11 @@ begin
   begin
     lOutput := TSimpleCGIOutput.Create(ARequest.Socket);
     lOutput.FDocumentRoot := FFileHandler.DocumentRoot;
+    {$IF FPC_FULLVERSION < 32000}
     lOutput.Process.CommandLine := FAppName;
+    {$ELSE}
+    lOutput.Process.Executable := FAppName;
+    {$ENDIF}
     lOutput.FScriptName := ARequest.URIPath;
     lOutput.FScriptFileName := ARequest.Document;
     lOutput.FExtraPath := ARequest.ExtraPath;
