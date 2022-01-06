@@ -654,13 +654,6 @@ var
   tempStr: string;
 begin
   lServerSocket := TLHTTPServerSocket(FSocket);
-{
-  FProcess.Environment.Add('SERVER_ADDR=');
-  FProcess.Environment.Add('SERVER_ADMIN=');
-  FProcess.Environment.Add('SERVER_NAME=');
-  FProcess.Environment.Add('SERVER_PORT=');
-}
-  Self := nil;
   tempStr := TLHTTPServer(lServerSocket.Creator).ServerSoftware;
   if Length(tempStr) > 0 then
     AddEnvironment('SERVER_SOFTWARE', tempStr);
