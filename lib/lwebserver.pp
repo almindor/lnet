@@ -322,7 +322,7 @@ begin
     lExecPath := FCGIRoot+lExecPath;
     if SeparatePath(lExecPath, lOutput.FExtraPath, faAnyFile and not faDirectory) then
     begin
-      {$IF FPC_FULLVERSION < 32000}
+      {$IF FPC_FULLVERSION < 30200}
       lOutput.Process.CommandLine := lExecPath;
       {$ELSE}
       lOutput.Process.Executable := lExecPath;
@@ -479,7 +479,7 @@ begin
   begin
     lOutput := TSimpleCGIOutput.Create(ARequest.Socket);
     lOutput.FDocumentRoot := FFileHandler.DocumentRoot;
-    {$IF FPC_FULLVERSION < 32000}
+    {$IF FPC_FULLVERSION < 30200}
     lOutput.Process.CommandLine := FAppName;
     {$ELSE}
     lOutput.Process.Executable := FAppName;
