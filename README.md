@@ -1,3 +1,15 @@
+# Updated to compile on macOS 10.14+ and Free Pascal 3.3.1 [2022/03/16]
+
+Quite a few changes were required, but all the examples now compile.
+
+Instructions:
+
+1) Download a ZIP file and unzip
+2) cd to the lnet-master directory
+3) run make
+4) For Lazarus add the path to lnet-master/lib to the Project Options > Paths - "Other unit files" OR
+5) For FPC use -Fu to add the path to lnet-master/lib
+
 # Lightweight Networking Library
 
 These units are an asynchronous, TCP/UDP communications classes.
