@@ -1,4 +1,4 @@
-# Updated to compile on macOS 10.14+ and Free Pascal 3.3.1 [2022/03/16]
+## Updated to compile on macOS 10.14+ and Free Pascal 3.3.1 [2022/03/16]
 
 Quite a few changes were required, but all the examples now compile.
 
