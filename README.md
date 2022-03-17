@@ -5,7 +5,7 @@ LTCP, LUDP, LTELNET, LFTP and LSMTP are example programs.
 
 Use the makefile to compile the lib as well as examples.
 
-All programs are compiled with Free Pascal 2.0.4+ (http://www.freepascal.org)
+All programs are compiled with Free Pascal 3.3.1 [2022/03/16] (http://www.freepascal.org)
 
 Copyright (c) 2005-2018 by Ales Katona and Micha Nelissen.
 
