@@ -15,7 +15,7 @@
   You should have received a Copy of the GNU Library General Public License
   along with This library; if not, Write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
+  
   This license has been modified. See File LICENSE.ADDON for more inFormation.
   Should you find these sources without a LICENSE File, please contact
   me at ales@chello.sk
@@ -47,7 +47,7 @@ type
   TLHandleEvent = procedure (aHandle: TLHandle) of object;
   TLHandleErrorEvent = procedure (aHandle: TLHandle; const msg: string) of object;
   TLEventerErrorEvent = procedure (const msg: string; Sender: TLEventer) of object;
-
+  
   { TLHandle }
 
   TLHandle = class(TObject)
@@ -60,14 +60,13 @@ type
     FIgnoreWrite: Boolean;   // so we can do edge-triggered
     FIgnoreRead: Boolean;    // so we can do edge-triggered
     FIgnoreError: Boolean;   // so we can do edge-triggered
-    FIsAcceptor: Boolean;    // if socket was server-accepted
     FDispose: Boolean;       // will free in the after-cycle
     FFreeing: Boolean;       // used to see if it's in the "to be freed" list
     FPrev: TLHandle;
     FNext: TLHandle;
     FFreeNext: TLHandle;
     FInternalData: Pointer;
-
+    
     procedure SetIgnoreError(const aValue: Boolean);
     procedure SetIgnoreWrite(const aValue: Boolean);
     procedure SetIgnoreRead(const aValue: Boolean);
@@ -172,7 +171,7 @@ type
     property Count: Integer read GetCount;
   end;
   TLEventerClass = class of TLEventer;
-
+  
   { TLSelectEventer }
 
   TLSelectEventer = class(TLEventer)
@@ -188,21 +187,21 @@ type
     constructor Create; override;
     function CallAction: Boolean; override;
   end;
-
+  
 {$i sys/lkqueueeventerh.inc}
 {$i sys/lepolleventerh.inc}
 
   function BestEventerClass: TLEventerClass;
-
+  
 implementation
 
 uses
   syncobjs,
   lCommon;
-
+  
 var
   CS: TCriticalSection;
-
+  
 { TLHandle }
 
 procedure TLHandle.SetIgnoreError(const aValue: Boolean);
@@ -287,7 +286,7 @@ end;
 
 procedure TLTimer.CallAction;
 begin
-  if FEnabled and Assigned(FOnTimer) and (Now - FStarted >= FInterval) then
+  if FEnabled and Assigned(FOnTimer) and (Now - FStarted >= FInterval) then 
   begin
     FOnTimer(Self);
     if not FOneShot then
@@ -509,14 +508,14 @@ begin
   if FTimeout.tv_sec < 0 then
     Result := -1
   else
-    Result := (FTimeout.tv_sec * 1000) + (FTimeout.tv_usec div 1000);
+    Result := (FTimeout.tv_sec * 1000) + FTimeout.tv_usec;
 end;
 
 procedure TLSelectEventer.SetTimeout(const Value: Integer);
 begin
   if Value >= 0 then begin
     FTimeout.tv_sec := Value div 1000;
-    FTimeout.tv_usec := (Value mod 1000) * 1000;
+    FTimeout.tv_usec := Value mod 1000;
   end else begin
     FTimeout.tv_sec := -1;
     FTimeout.tv_usec := 0;
@@ -537,7 +536,6 @@ var
   MaxHandle: THandle;
   TempTime: TTimeVal;
 begin
-  result := false;
   if FInLoop then
     Exit;
 
@@ -576,11 +574,11 @@ begin
     n := fpSelect(MaxHandle + 1, @FReadFDSet, @FWriteFDSet, @FErrorFDSet, @TempTime)
   else
     n := fpSelect(MaxHandle + 1, @FReadFDSet, @FWriteFDSet, @FErrorFDSet, nil);
-
+  
   if n < 0 then
     Bail('Error on select', LSocketError);
   Result := n > 0;
-
+  
   if Result then begin
     Temp := FRoot;
     while Assigned(Temp) do begin
