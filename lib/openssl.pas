@@ -1,4 +1,4 @@
-unit lOpenSSL;
+unit OpenSSL;
 
 {==============================================================================|
 | Project : Ararat Synapse                                       | 003.004.001 |
@@ -81,11 +81,7 @@ var
   { ADD NEW ONES WHEN THEY APPEAR!
     Always make .so/dylib first, then versions, in descending order!
     Add "." .before the version, first is always just "" }
-  DLLVersions: array[1..16] of string = ('', '.1.0.6', '.1.0.5', '.1.0.4', '.1.0.3',
-                                        '.1.0.2', '.1.0.1','.1.0.0','.0.9.8',
-                                        '.0.9.7', '.0.9.6', '.0.9.5', '.0.9.4',
-                                        '.0.9.3', '.0.9.2', '.0.9.1');
-
+  DLLVersions: array[1..7] of string = ('48', '47', '.46', '.45', '.44', '.43', '.35');
   {$ENDIF}
 
 type
@@ -573,7 +569,7 @@ begin
   if InitSSLInterface and Assigned(_SslLibraryInit) then
     Result := _SslLibraryInit
   else
-    Result := -1;
+    Result := 1;
 end;
 
 procedure SslLoadErrorStrings;
