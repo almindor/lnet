@@ -125,7 +125,7 @@ type
   function LSocketError: Longint;
   
   function SetBlocking(const aHandle: Integer; const aValue: Boolean): Boolean;
-  function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
+//  function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
 
   function IsBlockError(const anError: Integer): Boolean; inline;
   function IsNonFatalError(const anError: Integer): Boolean; inline;
@@ -135,7 +135,7 @@ type
 
   function StrToHostAddr(const IP: string): Cardinal; inline;
   function HostAddrToStr(const Entry: Cardinal): string; inline;
-  function StrToNetAddr(const IP: string): Sockets.in_addr; inline;
+  function StrToNetAddr(const IP: string): Cardinal; inline;
   function NetAddrToStr(const Entry: Cardinal): string; inline;
   
   procedure FillAddressInfo(var aAddrInfo: TLSocketAddress; const aFamily: sa_family_t;
@@ -209,7 +209,7 @@ var
 begin
   { lInfo.Bias is in minutes }
   if Windows.GetTimeZoneInformation(@lInfo) <> $FFFFFFFF then
-    Result := -lInfo.Bias * 60
+    Result := lInfo.Bias * 60
   else
     Result := 0;
 end;
@@ -363,7 +363,7 @@ end;
 
 // unix
 
-  ,Errors, UnixUtil;
+  ,Errors, Unix, UnixUtil;
 
 function LStrError(const Ernum: Longint; const UseUTF8: Boolean = False): string;
 begin
@@ -461,23 +461,23 @@ end;
 
 function TZSeconds: Integer; inline;
 begin
-  Result := unixutil.TZSeconds;
+  Result := TZInfo.Seconds;
 end;
 
 {$ENDIF}
 
-function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
+{function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
 var
-  opt: Integer = 0;
+  opt: cInt = 0;
 begin
   if aValue then
     opt := 1;
 
-  if fpsetsockopt(aHandle, IPPROTO_TCP, TCP_NODELAY, @opt, SizeOf(opt)) < 0 then
+  if fpsetsockopt(aHandle, IPPROTO_TCP, TCP_NODELAY, opt, SizeOf(opt)) < 0 then
     Exit(False);
 
   Result := True;
-end;
+end;}
 
 function StrToHostAddr(const IP: string): Cardinal; inline;
 begin
@@ -489,9 +489,9 @@ begin
   Result := Sockets.HostAddrToStr(in_addr(Entry));
 end;
 
-function StrToNetAddr(const IP: string): Sockets.in_addr; inline;
+function StrToNetAddr(const IP: string): Cardinal; inline;
 begin
-  Result := Sockets.StrToNetAddr(IP);
+  Result := Cardinal(Sockets.StrToNetAddr(IP));
 end;
 
 function NetAddrToStr(const Entry: Cardinal): string; inline;
@@ -518,9 +518,9 @@ begin
   case aFamily of
     LAF_INET  :
       begin
-        aAddrInfo.IPv4.sin_addr := StrToNetAddr(Address);
-        if (Address <> LADDR_ANY) and (Cardinal(aAddrInfo.IPv4.sin_addr) = 0) then
-          aAddrInfo.IPv4.sin_Addr := StrToNetAddr(GetHostIP(Address));
+        aAddrInfo.IPv4.sin_Addr.s_addr := StrToNetAddr(Address);
+        if (Address <> LADDR_ANY) and (aAddrInfo.IPv4.sin_Addr.s_addr = 0) then
+          aAddrInfo.IPv4.sin_Addr.s_addr := StrToNetAddr(GetHostIP(Address));
       end;
     LAF_INET6 :
       begin
