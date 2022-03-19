@@ -1,4 +1,4 @@
-## Updated to compile on macOS 10.14+ and FreeBSD 13.0
+## Updated to compile on macOS 10.12+ and FreeBSD 13.0
 
 Quite a few changes were required, but all the examples now compile.
 
