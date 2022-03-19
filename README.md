@@ -1,9 +1,10 @@
-## Updated to compile on macOS 10.14+ and Free Pascal 3.3.1 [2022/03/16]
+## Updated to compile on macOS 10.14+ and FreeBSD 13.0]
 
 Quite a few changes were required, but all the examples now compile.
 
 Instructions:
 
+0) Compile with FPC 3.2.2 or FPC 3.3.1
 1) Download a ZIP file and unzip
 2) cd to the lnet-master directory
 3) run make (this compiles the library and console examples - there are no Cocoa/Carbon hooks for the visual components, so they do not compile for macOS)
@@ -17,7 +18,7 @@ LTCP, LUDP, LTELNET, LFTP and LSMTP are example programs.
 
 Use the makefile to compile the lib as well as examples.
 
-All programs are compiled with Free Pascal 3.3.1 [2022/03/16] (http://www.freepascal.org)
+All programs are compiled with Free Pascal 3.2.2 or 3.3.1 (http://www.freepascal.org)
 
 Copyright (c) 2005-2018 by Ales Katona and Micha Nelissen.
 
