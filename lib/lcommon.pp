@@ -461,7 +461,12 @@ end;
 
 function TZSeconds: Integer; inline;
 begin
+{$IF FPC_FULLVERSION >= 33100}
   Result := TZInfo.Seconds;
+{$ENDIF}
+{$IF FPC_FULLVERSION <= 33000}
+  Result := TZSeconds;
+{$ENDIF}
 end;
 
 {$ENDIF}
