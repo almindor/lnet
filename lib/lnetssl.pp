@@ -9,7 +9,7 @@ uses
   lNet, lEvents;
   
 type
-  TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1);
+  TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
   TLSSLStatus = (slNone, slConnect, slActivateTLS, slShutdown);
 
   TLPasswordCB = function(buf: pChar; num, rwflag: cInt; userdata: Pointer): cInt; cdecl;
@@ -477,13 +477,35 @@ begin
     msSSLv2    : aMethod := SslMethodV2;
     msSSLv3    : aMethod := SslMethodV3;
     msTLSv1    : aMethod := SslMethodTLSV1;
+    msTLSv1_1  : aMethod := SslMethodTLSV1_1;
+    msTLSv1_2  : aMethod := SslMethodTLSV1_2;
   end;
 
-  FSSLContext := SSLCTXNew(aMethod);
 
+{$IFDEF FreeBSD}
+  // FreeBSD always wants to pick SSL v2/3 rather than TLS, so we
+  // try forcing TLS 1.3, 1.2, 1.1 and 1  before giving up
+  FSSLContext := SSLCTXNew(SslMethodTLSV1_3); {try TLS 1.3}
+  if not Assigned(FSSLContext) then
+    begin
+      FSSLContext := SSLCTXNew(SslMethodTLSV1_2); {try TLS 1.2}
+      if not Assigned(FSSLContext) then
+	begin
+          FSSLContext := SSLCTXNew(SslMethodTLSV1_1); {try TLS 1_1}
+          if not Assigned(FSSLContext) then
+	    begin
+              FSSLContext := SSLCTXNew(SslMethodTLSV1); {try TLS 1}
+              if not Assigned(FSSLContext) then
+                raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
+	    end;
+	end;
+    end;
+{$ELSE} // macOS always picks TLS 1.3 w/o any forcing 
+  FSSLContext := SSLCTXNew(aMethod);
   if not Assigned(FSSLContext) then
     raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
-    
+{$ENDIF}
+
   if SSLCTXSetMode(FSSLContext, SSL_MODE_ENABLE_PARTIAL_WRITE) and SSL_MODE_ENABLE_PARTIAL_WRITE <> SSL_MODE_ENABLE_PARTIAL_WRITE then
     raise Exception.Create('Error setting partial write mode on CTX');
   if SSLCTXSetMode(FSSLContext, SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER) and SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER <> SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER then
