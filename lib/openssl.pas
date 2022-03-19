@@ -116,12 +116,12 @@ var
     {Always make .so/dylib first, then versions, in descending order!  
     Add "." .before the version, first is always just "" }
     {$ELSE}
-    DLLVersions: array[1..17] of string = ( '', '.1.1', '.11',
-                                            '.10', '.1.1.1', '.1.1.0', 
-					    '.1.0.2', '.1.0.1','.1.0.0',
-					    '.0.9.8', '.0.9.7', '.0.9.6',
-					    '.0.9.5', '.0.9.4', '.0.9.3',
-					    '.0.9.2', '.0.9.1');
+    DLLVersions: array[1..18] of string = ( '', '.111', '.1.1.1', 
+                                            '.11', `.1.1', '.1.1.0',
+					    `.10', '.1.0.2', '.1.0.1',
+					    '.1.0.0', '.0.9.8', '.0.9.7',
+					    '.0.9.6', '.0.9.5', '.0.9.4',
+					    '.0.9.3', '.0.9.2', '.0.9.1');
     {$ENDIF}
    {$ENDIF OS2}
   {$ENDIF WINDOWS}
