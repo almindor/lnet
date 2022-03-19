@@ -108,12 +108,21 @@ var
 
   { ADD NEW ONES WHEN THEY APPEAR!
     Always make .so/dylib last (Darwin won't load unversioned), then versions,
-    in descending order!  Add "." .before the version, last is always just "" }
-    DLLVersions: array[1..21] of string = ('.48', '.47', '.46', '.45', '.44', 
-					    '.1.1', '.10', '.1.1.1', '.1.1.0', '.1.0.2',
-					    '.1.0.1','.1.0.0','.0.9.8', '.0.9.7', '.0.9.6',
-					    '.0.9.5', '.0.9.4', '.0.9.3', '.0.9.2', '.0.9.1',
-					    '');
+    in descending order!  Add "." .before the version}
+    {$IFDEF Darwin}
+    DLLVersions: array[1..12] of string = ('.48', '.47', '.46', '.45', '.44', 
+                                           '.43', '.42', '.41', '.39', '.35',
+					   '.0.9.8', '.0.9.7');
+    {Always make .so/dylib first, then versions, in descending order!  
+    Add "." .before the version, first is always just "" }
+    {$ELSE}
+    DLLVersions: array[1..17] of string = ( '', '.1.1', '.11',
+                                            '.10', '.1.1.1', '.1.1.0', 
+					    '.1.0.2', '.1.0.1','.1.0.0',
+					    '.0.9.8', '.0.9.7', '.0.9.6',
+					    '.0.9.5', '.0.9.4', '.0.9.3',
+					    '.0.9.2', '.0.9.1');
+    {$ENDIF}
    {$ENDIF OS2}
   {$ENDIF WINDOWS}
 
@@ -4719,9 +4728,10 @@ begin
   for i := Low(DLLVersions) to High(DLLVersions) do begin
     {$IFDEF DARWIN}
     Result := LoadLibrary(Value + DLLVersions[i] + '.dylib');
+    //WriteLn(Value + DLLVersions[i] + ' Result: ', Result);
     {$ELSE}
     Result := LoadLibrary(Value + '.so' + DLLVersions[i]);
-    WriteLn(Value + DLLVersions[i] + 'Result: ', Result);
+    //WriteLn(Value + DLLVersions[i] + ' Result: ', Result);
     {$ENDIF}
 
     if Result <> NilHandle then
