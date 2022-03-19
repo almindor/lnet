@@ -484,20 +484,16 @@ begin
 
 {$IFDEF FreeBSD}
   // FreeBSD always wants to pick SSL v2/3 rather than TLS, so we
-  // try forcing TLS 1.3, 1.2, 1.1 and 1  before giving up
-  FSSLContext := SSLCTXNew(SslMethodTLSV1_3); {try TLS 1.3}
+  // try forcing TLS 1.2, 1.1 and 1  before giving up
+  FSSLContext := SSLCTXNew(SslMethodTLSV1_2); {try TLS 1.2}
   if not Assigned(FSSLContext) then
     begin
-      FSSLContext := SSLCTXNew(SslMethodTLSV1_2); {try TLS 1.2}
+      FSSLContext := SSLCTXNew(SslMethodTLSV1_1); {try TLS 1_1}
       if not Assigned(FSSLContext) then
-	begin
-          FSSLContext := SSLCTXNew(SslMethodTLSV1_1); {try TLS 1_1}
+        begin
+          FSSLContext := SSLCTXNew(SslMethodTLSV1); {try TLS 1}
           if not Assigned(FSSLContext) then
-	    begin
-              FSSLContext := SSLCTXNew(SslMethodTLSV1); {try TLS 1}
-              if not Assigned(FSSLContext) then
-                raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
-	    end;
+             raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
 	end;
     end;
 {$ELSE} // macOS always picks TLS 1.3 w/o any forcing 
