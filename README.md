@@ -1,6 +1,11 @@
-## Updated to compile on macOS 10.12+ and FreeBSD 13.0
+# Updated to compile on FreeBSD, Linux, macOS and Windows
 
 Quite a few changes were required, but all the examples now compile.
+
+* FreeBSD (tested on 13.0-RELEASE)
+* Linux (tested on Ubuntu 20.10 - Note: TLS does not work)
+* macOS 10.12 and later
+* Windows (tested on 10 with updated SSL libraries - see OpenSSL.pas for details)
 
 Instructions:
 
