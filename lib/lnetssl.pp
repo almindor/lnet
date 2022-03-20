@@ -9,7 +9,18 @@ uses
   lNet, lEvents;
   
 type
+  // Set preferred TLS order
+  {$IFDEF Darwin}
+  // With this order, Darwin always chooses TLS v1.3 after msSSLv2or3 requested
+  // - Darwin uses LibreSSL...
+  // Whereas FreeBSD and Linux (Ubuntu 20.10) always fail trying SSLv2or3
+  // - FreeBSD and Linux use OpenSSL...
   TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
+  {$ELSE}
+  // Force preferred order for FreeBSD and Linux
+  TLSSLMethod = (msTLSv1_2, msTLSv1_1, msTLSv1, msSSLv2or3, msSSLv2, msSSLv3);
+  {$ENDIF}
+
   TLSSLStatus = (slNone, slConnect, slActivateTLS, slShutdown);
 
   TLPasswordCB = function(buf: pChar; num, rwflag: cInt; userdata: Pointer): cInt; cdecl;
@@ -466,12 +477,17 @@ procedure TLSSLSession.CreateSSLContext;
 var
   aMethod: PSSL_METHOD;
 begin
+  // To be sure, to be sure...
+  if not IsSSLloaded then
+    raise Exception.Create('Unable to initialize SSL library, check your LibreSSL or OpenSSL installation');
+
   if Assigned(FSSLContext) then
     SSLCTXFree(FSSLContext);
     
   if not FSSLActive then
     Exit;
 
+  // Preferred order is set in the type definition of TLSSLMethod above
   case FMethod of
     msSSLv2or3 : aMethod := SslMethodV23;
     msSSLv2    : aMethod := SslMethodV2;
@@ -481,26 +497,12 @@ begin
     msTLSv1_2  : aMethod := SslMethodTLSV1_2;
   end;
 
+  // old C programmer's debugging method
+  //WriteLn('TLS method: ', FMethod);
 
-{$IFDEF FreeBSD}
-  // FreeBSD always wants to pick SSL v2/3 rather than TLS, so we
-  // try forcing TLS 1.2, 1.1 and 1  before giving up
-  FSSLContext := SSLCTXNew(SslMethodTLSV1_2); {try TLS 1.2}
-  if not Assigned(FSSLContext) then
-    begin
-      FSSLContext := SSLCTXNew(SslMethodTLSV1_1); {try TLS 1_1}
-      if not Assigned(FSSLContext) then
-        begin
-          FSSLContext := SSLCTXNew(SslMethodTLSV1); {try TLS 1}
-          if not Assigned(FSSLContext) then
-             raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
-	end;
-    end;
-{$ELSE} // macOS always picks TLS 1.3 w/o any forcing 
   FSSLContext := SSLCTXNew(aMethod);
   if not Assigned(FSSLContext) then
     raise Exception.Create('Error creating SSL CTX: SSLCTXNew');
-{$ENDIF}
 
   if SSLCTXSetMode(FSSLContext, SSL_MODE_ENABLE_PARTIAL_WRITE) and SSL_MODE_ENABLE_PARTIAL_WRITE <> SSL_MODE_ENABLE_PARTIAL_WRITE then
     raise Exception.Create('Error setting partial write mode on CTX');
