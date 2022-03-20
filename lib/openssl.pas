@@ -95,7 +95,7 @@ var
   {$IFDEF Win32}
   DLLSSLName: string = 'libssl-1_1.dll';
   DLLSSLName2: string = 'libssl-1_1.dll';
-  DLLUtilName: string = 'libcrypto-3.dll';
+  DLLUtilName: string = 'libcrypto-1_1.dll';
   {$ENDIF}
   {$IFDEF Win64}
   DLLSSLName: string = 'libssl-1_1-x64.dll';
