@@ -86,11 +86,24 @@ uses
 
 var
   {$IFDEF WINDOWS}
+  { Too old!
   DLLSSLName: string = 'ssleay32.dll';
   DLLSSLName2: string = 'libssl32.dll';
-  DLLUtilName: string = 'libeay32.dll';
+  DLLUtilName: string = 'libeay32.dll';}
+  // Download modern 32 and 64 bit versions from:
+  // https://slproweb.com/products/Win32OpenSSL.html
+  {$IFDEF Win32}
+  DLLSSLName: string = 'libssl-1_1.dll';
+  DLLSSLName2: string = 'libssl-1_1.dll';
+  DLLUtilName: string = 'libcrypto-3.dll';
+  {$ENDIF}
+  {$IFDEF Win64}
+  DLLSSLName: string = 'libssl-1_1-x64.dll';
+  DLLSSLName2: string = 'libssl-1_1-x64.dll';
+  DLLUtilName: string = 'libcrypto-1_1-x64.dll';
+  {$ENDIF}
   {$ELSE}
-   {$IFDEF OS2}
+  {$IFDEF OS2}
     {$IFDEF OS2GCC}
   DLLSSLName: string = 'kssl10.dll';
   DLLUtilName: string = 'kcrypt10.dll';
@@ -102,7 +115,7 @@ var
   DLLSSLName2: string = 'ssl.dll';
   DLLUtilName2: string = 'crypto.dll';
     {$ENDIF OS2GCC}
-   {$ELSE OS2}
+  {$ELSE OS2}
   DLLSSLName: string = 'libssl';
   DLLUtilName: string = 'libcrypto';
 

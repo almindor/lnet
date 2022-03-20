@@ -17,7 +17,7 @@ type
   // - FreeBSD and Linux use OpenSSL...
   TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
   {$ELSE}
-  // Force preferred order for FreeBSD and Linux
+  // Force preferred order for FreeBSD, Linux and Windows
   TLSSLMethod = (msTLSv1_2, msTLSv1_1, msTLSv1, msSSLv2or3, msSSLv2, msSSLv3);
   {$ENDIF}
 
