@@ -13,7 +13,7 @@ type
   {$IFDEF Darwin}
   // With this order, Darwin always chooses TLS v1.3 after msSSLv2or3 requested
   // - Darwin uses LibreSSL...
-  // Whereas FreeBSD and Linux (Ubuntu 20.10) always fail trying SSLv2or3
+  // Whereas FreeBSD and (Ubuntu 20.10) and Windows (10) always fail trying SSLv2or3
   // - FreeBSD and Linux use OpenSSL...
   TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
   {$ELSE}
