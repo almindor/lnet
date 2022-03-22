@@ -9,17 +9,10 @@ uses
   lNet, lEvents;
   
 type
-  // Set preferred TLS order
-  {$IFDEF Darwin}
-  // With this order, Darwin always chooses TLS v1.3 after msSSLv2or3 requested
-  // - Darwin uses LibreSSL...
-  // Whereas FreeBSD and (Ubuntu 20.10) and Windows (10) always fail trying SSLv2or3
-  // - FreeBSD and Linux use OpenSSL...
-  TLSSLMethod = (msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
-  {$ELSE}
-  // Force preferred order for FreeBSD, Linux and Windows
-  TLSSLMethod = (msTLSv1_2, msTLSv1_1, msTLSv1, msSSLv2or3, msSSLv2, msSSLv3);
-  {$ENDIF}
+  // Set preferred protocol order
+  // FreeBSD (12), macOS (10,12+) and Windows (10) choose TLS v1.3
+  // Linux (Ubuntu 20.19) chooses TLS v1.2
+  TLSSLMethod = (msTLS, msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
 
   TLSSLStatus = (slNone, slConnect, slActivateTLS, slShutdown);
 
@@ -495,6 +488,7 @@ begin
     msTLSv1    : aMethod := SslMethodTLSV1;
     msTLSv1_1  : aMethod := SslMethodTLSV1_1;
     msTLSv1_2  : aMethod := SslMethodTLSV1_2;
+    msTLS      : aMethod := SslTLSMethod;
   end;
 
   // old C programmer's debugging method
