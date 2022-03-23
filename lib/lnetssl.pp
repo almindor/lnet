@@ -11,7 +11,7 @@ uses
 type
   // Set preferred protocol order
   // FreeBSD (12), macOS (10,12+) and Windows (10) choose TLS v1.3
-  // Linux (Ubuntu 20.19) chooses TLS v1.2
+  // Linux (Ubuntu 21.10) chooses TLS v1.2
   TLSSLMethod = (msTLS, msSSLv2or3, msSSLv2, msSSLv3, msTLSv1, msTLSv1_1, msTLSv1_2);
 
   TLSSLStatus = (slNone, slConnect, slActivateTLS, slShutdown);
