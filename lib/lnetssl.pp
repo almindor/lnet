@@ -482,11 +482,6 @@ begin
 
   // Preferred order is set in the type definition of TLSSLMethod above
   case FMethod of
-    msSSLv2or3 : aMethod := SslMethodV23;
-    msSSLv2    : aMethod := SslMethodV2;
-    msSSLv3    : aMethod := SslMethodV3;
-    msTLSv1    : aMethod := SslMethodTLSV1;
-    msTLSv1_1  : aMethod := SslMethodTLSV1_1;
     msTLSv1_2  : aMethod := SslMethodTLSV1_2;
     msTLS      : aMethod := SslTLSMethod;
   end;
