@@ -1,6 +1,6 @@
 # Updated to compile on FreeBSD, Linux, macOS and Windows
 
-Quite a few changes were required, but all the examples now compile.
+Quite a few changes were required, but all the examples now compile with FPC 3.2.2 or 3.3.1.
 
 * FreeBSD (tested on 13.0-RELEASE)
 * Linux (tested on Ubuntu 21.10 - Note: TLS does not work)
