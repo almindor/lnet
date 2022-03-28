@@ -3,9 +3,10 @@
 Quite a few changes were required, but all the examples now compile.
 
 * FreeBSD (tested on 13.0-RELEASE)
-* Linux (tested on Ubuntu 20.10 - Note: TLS does not work)
+* Linux (tested on Ubuntu 21.10 - Note: TLS does not work)
 * macOS 10.12 and later
 * Windows (tested on 10 with updated SSL libraries - see OpenSSL.pas for details)
+* All insecure TLS/SSL methods have been removed (ie SSL2, SSL3, TLS v1, TLS v1.1) leaving TSL v1.2 and TLS v1.3
 
 Instructions:
 
