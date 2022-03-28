@@ -1,6 +1,6 @@
 # Updated to compile on FreeBSD, Linux, macOS and Windows
 
-Quite a few changes were required, but all the examples now compile with FPC 3.2.2 or 3.3.1.
+Quite a few changes were required, but all the examples now compile with FPC 3.2.2 or 3.3.1 on:
 
 * FreeBSD (tested on 13.0-RELEASE)
 * Linux (tested on Ubuntu 21.10 - Note: TLS does not work)
@@ -17,14 +17,16 @@ Instructions:
 4) For Lazarus, add the path to lnet-master/lib to the Project Options > Paths - "Other unit files" OR
 5) For FPC, use -Fu to add the path to lnet-master/lib
 
-# Lightweight Networking Library
+# Original ReadMe Content
+
+## Lightweight Networking Library
 
 These units are an asynchronous, TCP/UDP communications classes.
 LTCP, LUDP, LTELNET, LFTP and LSMTP are example programs.
 
 Use the makefile to compile the lib as well as examples.
 
-All programs are compiled with Free Pascal 3.2.2 or 3.3.1 (http://www.freepascal.org)
+All programs are compiled with Free Pascal 2.0.4 (http://www.freepascal.org)
 
 Copyright (c) 2005-2018 by Ales Katona and Micha Nelissen.
 
