@@ -1,6 +1,5 @@
 {$ifdef WINDOWS}
   Winsock2,
-  lws2override,
 {$endif}
 
 {$ifdef UNIX}
