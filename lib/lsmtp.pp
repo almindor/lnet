@@ -25,6 +25,7 @@ unit lsmtp;
 
 {$mode objfpc}{$H+}
 {$inline on}
+{$macro on}
 
 interface
 
@@ -187,7 +188,7 @@ type
     procedure Rset;
     procedure Quit;
     
-    procedure Disconnect(const Forced: Boolean = False); override;
+    procedure Disconnect(const Forced: Boolean = True); override;
     
     procedure CallAction; override;
    public
@@ -912,7 +913,7 @@ begin
   end;
 end;
 
-procedure TLSMTPClient.Disconnect(const Forced: Boolean = False);
+procedure TLSMTPClient.Disconnect(const Forced: Boolean = True);
 begin
   FConnection.Disconnect(Forced);
   FStatus.Clear;
