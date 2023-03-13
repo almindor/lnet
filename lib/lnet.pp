@@ -1130,7 +1130,10 @@ procedure TLUdp.Disconnect(const Forced: Boolean = True);
 begin
   if Assigned(FRootSock) then begin
     FRootSock.Disconnect(True);
-    FRootSock := nil; // even if the old one exists, eventer takes care of it
+    (*
+     * Apply Patch: https://github.com/almindor/lnet/issues/15
+     *)
+    FreeAndNil(FRootSock); // even if the old one exists, eventer takes care of it
   end;
 end;
 

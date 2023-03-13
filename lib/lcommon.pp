@@ -151,7 +151,7 @@ uses
 {$IFNDEF UNIX}
 
 {$IFDEF WINDOWS}
-  , Windows, lws2tcpip;
+  , Windows, lws2tcpip, ctypes;
 
 {$IFDEF WINCE}
 
