@@ -1132,15 +1132,15 @@ begin
     FRootSock.Disconnect(True);
     (*
      * Apply Patch: https://github.com/almindor/lnet/issues/15
-     * This Issue is only present on Windows Systems
-     * On Linux Systems FreeAndNil will leed to a crash if
-     * the component is disconnected while handled in a levent.
+     * This Issue is not solved yet.
+     * if disconnect is called within a socket event then FRootSock is not allowed to be freed
+     * if Disconnect is called outside a socket event then FRootSock needs to be freed otherwise
+     *   a memory leack is created.
+     *
+     * as the normal case is that disconnect is called from outside a socket event
+     * the free method is choosen.
      *)
-{$ifdef LINUX}
-    FRootSock := nil; // even if the old one exists, eventer takes care of it
-{$else}
-    FreeAndNil(FRootSock);
-{$endif}
+    FreeAndNil(FRootSock); // even if the old one exists, eventer takes care of it
   end;
 end;
 
