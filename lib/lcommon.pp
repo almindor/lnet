@@ -125,7 +125,9 @@ type
   function LSocketError: Longint;
 
   function SetBlocking(const aHandle: Integer; const aValue: Boolean): Boolean;
-//  function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
+{$IFNDEF DARWIN}
+  function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
+{$ENDIF}
 
   function IsBlockError(const anError: Integer): Boolean; inline;
   function IsNonFatalError(const anError: Integer): Boolean; inline;
@@ -149,7 +151,7 @@ uses
 {$IFNDEF UNIX}
 
 {$IFDEF WINDOWS}
-  , Windows, lws2tcpip;
+  , Windows, lws2tcpip, ctypes;
 
 {$IFDEF WINCE}
 
@@ -470,18 +472,20 @@ end;
 
 {$ENDIF}
 
-{function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
+{$IFNDEF DARWIN}
+function SetNoDelay(const aHandle: Integer; const aValue: Boolean): Boolean;
 var
-  opt: cInt = 0;
+  opt: cbool = false;
 begin
   if aValue then
-    opt := 1;
+    opt := true;
 
-  if fpsetsockopt(aHandle, IPPROTO_TCP, TCP_NODELAY, opt, SizeOf(opt)) < 0 then
+  if fpsetsockopt(aHandle, IPPROTO_TCP, TCP_NODELAY, @opt, SizeOf(opt)) < 0 then
     Exit(False);
 
   Result := True;
-end;}
+end;
+{$ENDIF}
 
 function StrToHostAddr(const IP: string): Cardinal; inline;
 begin

@@ -58,7 +58,7 @@ type
 
   { TLSocketState }
   TLSocketState = (ssServerSocket, ssBlocking, ssReuseAddress, ssCanSend,
-                   ssCanReceive, ssSSLActive{, ssNoDelay});
+                   ssCanReceive, ssSSLActive{$IFNDEF DARWIN}, ssNoDelay{$ENDIF});
 
   { TLSocketStates }
   TLSocketStates = set of TLSocketState;
@@ -113,7 +113,9 @@ type
     procedure SetOptions; virtual;
     procedure SetBlocking(const aValue: Boolean);
     procedure SetReuseAddress(const aValue: Boolean);
-//    procedure SetNoDelay(const aValue: Boolean);
+{$IFNDEF DARWIN}
+    procedure SetNoDelay(const aValue: Boolean);
+{$ENDIF}
 
     procedure HardDisconnect(const NoShutdown: Boolean = False);
     procedure SoftDisconnect;
@@ -467,7 +469,9 @@ begin
                             FSocketState := FSocketState - [aState];
     
     ssSSLActive         : raise Exception.Create('Can not turn SSL/TLS on in TLSocket instance');
-{    ssNoDelay           : SetNoDelay(TurnOn);}
+{$IFNDEF DARWIN}
+    ssNoDelay           : SetNoDelay(TurnOn);
+{$ENDIF}
   end;
   
   Result := True;
@@ -613,7 +617,8 @@ begin
   end;
 end;
 
-{procedure TLSocket.SetNoDelay(const aValue: Boolean);
+{$IFNDEF DARWIN}
+procedure TLSocket.SetNoDelay(const aValue: Boolean);
 begin
   if FHandle >= 0 then // we already set our socket
     if not lCommon.SetNoDelay(FHandle, aValue) then
@@ -624,7 +629,8 @@ begin
       else
         FSocketState := FSocketState - [ssNoDelay];
     end;
-end;}
+end;
+{$ENDIF}
 
 function TLSocket.GetMessage(out msg: string): Integer;
 begin
@@ -1124,7 +1130,17 @@ procedure TLUdp.Disconnect(const Forced: Boolean = True);
 begin
   if Assigned(FRootSock) then begin
     FRootSock.Disconnect(True);
-    FRootSock := nil; // even if the old one exists, eventer takes care of it
+    (*
+     * Apply Patch: https://github.com/almindor/lnet/issues/15
+     * This Issue is not solved yet.
+     * if disconnect is called within a socket event then FRootSock is not allowed to be freed
+     * if Disconnect is called outside a socket event then FRootSock needs to be freed otherwise
+     *   a memory leack is created.
+     *
+     * as the normal case is that disconnect is called from outside a socket event
+     * the free method is choosen.
+     *)
+    FreeAndNil(FRootSock); // even if the old one exists, eventer takes care of it
   end;
 end;
 
