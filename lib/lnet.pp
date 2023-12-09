@@ -508,9 +508,19 @@ function TLSocket.GetPeerAddress: string;
 begin
   Result := '';
   if FSocketType = SOCK_STREAM then
-    Result := NetAddrtoStr(FAddress.IPv4.sin_addr)
+    begin
+     If FSocketNet = LAF_INET6 then
+          Result := NetAddrtoStr6(FAddress.IPv6.sin6_addr)
+       else
+          Result := NetAddrtoStr(FAddress.IPv4.sin_addr);
+    end
   else
-    Result := NetAddrtoStr(FPeerAddress.IPv4.sin_addr);
+    begin
+    if FSocketNet = LAF_INET6 then
+        Result :=  NetAddrtoStr6(FPeerAddress.IPv6.sin6_addr)
+      else
+        Result := NetAddrtoStr(FPeerAddress.IPv4.sin_addr);
+    end;
 end;
 
 function TLSocket.GetLocalAddress: string;
