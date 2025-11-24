@@ -134,6 +134,7 @@ type
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean;
     function Accept(const SerSock: TSocket): Boolean;
     function Connect(const Address: string; const APort: Word): Boolean;
+    function Connect(const Address: string; const APort: Word; const AIntf: string): Boolean; overload;
     
     function Send(const aData; const aSize: Integer): Integer; virtual;
     function SendMessage(const msg: string): Integer;
@@ -275,8 +276,9 @@ type
    public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    
+
     function Connect(const Address: string; const APort: Word): Boolean; virtual; overload;
+    function Connect(const Address: string; const APort: Word; const AIntf: string): Boolean; virtual; overload;
     function Connect: Boolean; virtual; overload;
     
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; virtual; abstract; overload;
@@ -322,8 +324,9 @@ type
     procedure SetAddress(const Address: string);
    public
     constructor Create(aOwner: TComponent); override;
-    
+
     function Connect(const Address: string; const APort: Word): Boolean; override;
+    function Connect(const Address: string; const APort: Word; const AIntf: string): Boolean; overload; virtual;
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
     
     function Get(out aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
@@ -373,6 +376,7 @@ type
     constructor Create(aOwner: TComponent); override;
 
     function Connect(const Address: string; const APort: Word): Boolean; override;
+    function Connect(const Address: string; const APort: Word; const AIntf: string): Boolean; overload; virtual;
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
 
     function Get(out aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
@@ -849,15 +853,79 @@ end;
 function TLSocket.Connect(const Address: string; const aPort: Word): Boolean;
 begin
   Result := False;
-  
+
   if FConnectionStatus <> scNone then
     Disconnect(True);
-    
+
   if SetupSocket(APort, Address) then begin
     fpConnect(FHandle, GetIPAddressPointer, GetIPAddressLength);
     FConnectionStatus := scConnecting;
     Result := True;
   end;
+end;
+
+function TLSocket.Connect(const Address: string; const aPort: Word; const AIntf: string): Boolean;
+var
+  Arg, Opt: Integer;
+  LocalAddr: TLSocketAddress;
+  LocalAddrLen: TSocklen;
+begin
+  Result := False;
+
+  if FConnectionStatus <> scNone then
+    Disconnect(True);
+
+  if FConnectionStatus = scNone then begin
+    // Create socket
+    FHandle := fpSocket(FSocketNet, FSocketType, FProtocol);
+    if FHandle = INVALID_SOCKET then
+      Exit(Bail('Socket error', LSocketError));
+    SetOptions;
+
+    // Set socket options (same as SetupSocket)
+    Arg := 1;
+    if FSocketType = SOCK_DGRAM then begin
+      if fpsetsockopt(FHandle, SOL_SOCKET, SO_BROADCAST, @Arg, Sizeof(Arg)) = SOCKET_ERROR then
+        Exit(Bail('SetSockOpt error', LSocketError));
+    end
+    else
+    if FReuseAddress then begin
+      Opt := SO_REUSEADDR;
+      {$ifdef WIN32}
+      if (Win32Platform = 2) and (Win32MajorVersion >= 5) then
+        Opt := Integer(not Opt);
+      {$endif}
+      if fpsetsockopt(FHandle, SOL_SOCKET, Opt, @Arg, Sizeof(Arg)) = SOCKET_ERROR then
+        Exit(Bail('SetSockOpt error', LSocketError));
+    end;
+
+    {$ifdef darwin}
+    Arg := 1;
+    if fpsetsockopt(FHandle, SOL_SOCKET, SO_NOSIGPIPE, @Arg, Sizeof(Arg)) = SOCKET_ERROR then
+      Exit(Bail('SetSockOpt error', LSocketError));
+    {$endif}
+
+    // KEY: Bind to local interface ONLY if specific interface is requested
+    // If AIntf is LADDR_ANY (0.0.0.0), skip bind and let OS choose interface
+    if (AIntf <> LADDR_ANY) and (AIntf <> '') then begin
+      FillAddressInfo(LocalAddr, FSocketNet, AIntf, 0);
+      if FSocketNet = LAF_INET6 then
+        LocalAddrLen := SizeOf(LocalAddr.IPv6)
+      else
+        LocalAddrLen := SizeOf(LocalAddr.IPv4);
+
+      if fpBind(FHandle, @LocalAddr, LocalAddrLen) = SOCKET_ERROR then
+        Exit(Bail('Error binding to local interface', LSocketError));
+    end;
+
+    // Set remote peer address and connect (like original SetupSocket + Connect)
+    FillAddressInfo(FAddress, FSocketNet, Address, aPort);
+    FillAddressInfo(FPeerAddress, FSocketNet, LADDR_BR, aPort);
+    fpConnect(FHandle, GetIPAddressPointer, GetIPAddressLength);
+    FConnectionStatus := scConnecting;
+    Result := True;
+  end;
+
 end;
 
 function TLSocket.SendMessage(const msg: string): Integer;
@@ -933,6 +1001,13 @@ begin
   FHost := Address;
   FPort := aPort;
   Result := False;
+end;
+
+function TLConnection.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
+begin
+  FHost := Address;
+  FPort := aPort;
+  Result := False; // Base implementation - overridden in derived classes
 end;
 
 function TLConnection.Connect: Boolean;
@@ -1165,11 +1240,34 @@ begin
   FIterator := FRootSock;
 
   Result := FRootSock.SetupSocket(APort, LADDR_ANY);
-  
+
   if Result then begin
     FillAddressInfo(FRootSock.FPeerAddress, FRootSock.FSocketNet, Address, aPort);
     FRootSock.FConnectionStatus := scConnected;
     RegisterWithEventer;
+  end;
+end;
+
+function TLUdp.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
+begin
+  Result := inherited Connect(Address, aPort);
+
+  if Assigned(FRootSock) and (FRootSock.FConnectionStatus <> scNone) then
+    Disconnect(True);
+
+  FRootSock := InitSocket(SocketClass.Create);
+  FIterator := FRootSock;
+
+  Result := FRootSock.SetupSocket(APort, AIntf); // Bind to specific interface
+
+  if Result then begin
+    if fpBind(FRootSock.FHandle, FRootSock.GetIPAddressPointer, FRootSock.GetIPAddressLength) = SOCKET_ERROR then
+      Result := Bail('Error binding to local interface')
+    else begin
+      FillAddressInfo(FRootSock.FPeerAddress, FRootSock.FSocketNet, Address, aPort);
+      FRootSock.FConnectionStatus := scConnected;
+      RegisterWithEventer;
+    end;
   end;
 end;
 
@@ -1333,19 +1431,39 @@ end;
 function TLTcp.Connect(const Address: string; const APort: Word): Boolean;
 begin
   Result := inherited Connect(Address, aPort);
-  
+
   if Assigned(FRootSock) then
     Disconnect(True);
-    
+
   FRootSock := InitSocket(SocketClass.Create);
   Result := FRootSock.Connect(Address, aPort);
-  
+
   if Result then begin
     Inc(FCount);
     FIterator := FRootSock;
     RegisterWithEventer;
   end else begin
     FreeAndNil(FRootSock); // one possible use, since we're not in eventer yet
+    FIterator := nil;
+  end;
+end;
+
+function TLTcp.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
+begin
+  Result := inherited Connect(Address, aPort);
+
+  if Assigned(FRootSock) then
+    Disconnect(True);
+
+  FRootSock := InitSocket(SocketClass.Create);
+  Result := FRootSock.Connect(Address, aPort, AIntf); // Use 3-parameter version
+
+  if Result then begin
+    Inc(FCount);
+    FIterator := FRootSock;
+    RegisterWithEventer;
+  end else begin
+    FreeAndNil(FRootSock);
     FIterator := nil;
   end;
 end;
