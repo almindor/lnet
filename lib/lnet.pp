@@ -133,7 +133,7 @@ type
     
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean;
     function Accept(const SerSock: TSocket): Boolean;
-    function Connect(const Address: string; const APort: Word): Boolean;
+    function Connect(const Address: string; const APort: Word; const AIntf: string = LADDR_ANY): Boolean;
     
     function Send(const aData; const aSize: Integer): Integer; virtual;
     function SendMessage(const msg: string): Integer;
@@ -195,7 +195,7 @@ type
   { Interface for all clients }
   
   ILClient = interface
-    function Connect(const Address: string; const APort: Word): Boolean; overload;
+    function Connect(const Address: string; const APort: Word; const AIntf: string = LADDR_ANY): Boolean; overload;
     function Connect: Boolean; overload;
   end;
   
@@ -275,8 +275,8 @@ type
    public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    
-    function Connect(const Address: string; const APort: Word): Boolean; virtual; overload;
+
+    function Connect(const Address: string; const APort: Word; const AIntf: string = LADDR_ANY): Boolean; virtual; overload;
     function Connect: Boolean; virtual; overload;
     
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; virtual; abstract; overload;
@@ -322,8 +322,8 @@ type
     procedure SetAddress(const Address: string);
    public
     constructor Create(aOwner: TComponent); override;
-    
-    function Connect(const Address: string; const APort: Word): Boolean; override;
+
+    function Connect(const Address: string; const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
     
     function Get(out aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
@@ -372,7 +372,7 @@ type
    public
     constructor Create(aOwner: TComponent); override;
 
-    function Connect(const Address: string; const APort: Word): Boolean; override;
+    function Connect(const Address: string; const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
     function Listen(const APort: Word; const AIntf: string = LADDR_ANY): Boolean; override;
 
     function Get(out aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
@@ -846,14 +846,29 @@ begin
     Bail('Error on accept', LSocketError);
 end;
 
-function TLSocket.Connect(const Address: string; const aPort: Word): Boolean;
+function TLSocket.Connect(const Address: string; const aPort: Word; const AIntf: string): Boolean;
+var
+  LocalAddr: TLSocketAddress;
+  LocalAddrLen: TSocklen;
 begin
   Result := False;
-  
+
   if FConnectionStatus <> scNone then
     Disconnect(True);
-    
+
   if SetupSocket(APort, Address) then begin
+    // Bind to local interface if specified
+    if (AIntf <> LADDR_ANY) and (AIntf <> '') then begin
+      FillAddressInfo(LocalAddr, FSocketNet, AIntf, 0);
+      if FSocketNet = LAF_INET6 then
+        LocalAddrLen := SizeOf(LocalAddr.IPv6)
+      else
+        LocalAddrLen := SizeOf(LocalAddr.IPv4);
+
+      if fpBind(FHandle, @LocalAddr, LocalAddrLen) = SOCKET_ERROR then
+        Exit(Bail('Error binding to local interface', LSocketError));
+    end;
+
     fpConnect(FHandle, GetIPAddressPointer, GetIPAddressLength);
     FConnectionStatus := scConnecting;
     Result := True;
@@ -927,8 +942,7 @@ begin
   inherited Destroy;
 end;
 
-function TLConnection.Connect(const Address: string; const APort: Word
-  ): Boolean;
+function TLConnection.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
 begin
   FHost := Address;
   FPort := aPort;
@@ -1154,9 +1168,12 @@ begin
   end;
 end;
 
-function TLUdp.Connect(const Address: string; const APort: Word): Boolean;
+function TLUdp.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
+var
+  LocalAddr: TLSocketAddress;
+  LocalAddrLen: TSocklen;
 begin
-  Result := inherited Connect(Address, aPort);
+  Result := inherited Connect(Address, aPort, AIntf);
 
   if Assigned(FRootSock) and (FRootSock.FConnectionStatus <> scNone) then
     Disconnect(True);
@@ -1165,8 +1182,20 @@ begin
   FIterator := FRootSock;
 
   Result := FRootSock.SetupSocket(APort, LADDR_ANY);
-  
+
   if Result then begin
+    // Bind to local interface if specified
+    if (AIntf <> LADDR_ANY) and (AIntf <> '') then begin
+      FillAddressInfo(LocalAddr, FRootSock.FSocketNet, AIntf, 0);
+      if FRootSock.FSocketNet = LAF_INET6 then
+        LocalAddrLen := SizeOf(LocalAddr.IPv6)
+      else
+        LocalAddrLen := SizeOf(LocalAddr.IPv4);
+
+      if fpBind(FRootSock.FHandle, @LocalAddr, LocalAddrLen) = SOCKET_ERROR then
+        Exit(Bail('Error binding to local interface'));
+    end;
+
     FillAddressInfo(FRootSock.FPeerAddress, FRootSock.FSocketNet, Address, aPort);
     FRootSock.FConnectionStatus := scConnected;
     RegisterWithEventer;
@@ -1330,22 +1359,22 @@ begin
   FRootSock  := nil;
 end;
 
-function TLTcp.Connect(const Address: string; const APort: Word): Boolean;
+function TLTcp.Connect(const Address: string; const APort: Word; const AIntf: string): Boolean;
 begin
-  Result := inherited Connect(Address, aPort);
-  
+  Result := inherited Connect(Address, aPort, AIntf);
+
   if Assigned(FRootSock) then
     Disconnect(True);
-    
+
   FRootSock := InitSocket(SocketClass.Create);
-  Result := FRootSock.Connect(Address, aPort);
-  
+  Result := FRootSock.Connect(Address, aPort, AIntf);
+
   if Result then begin
     Inc(FCount);
     FIterator := FRootSock;
     RegisterWithEventer;
   end else begin
-    FreeAndNil(FRootSock); // one possible use, since we're not in eventer yet
+    FreeAndNil(FRootSock);
     FIterator := nil;
   end;
 end;

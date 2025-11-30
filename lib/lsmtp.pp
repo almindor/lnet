@@ -166,8 +166,8 @@ type
    public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    
-    function Connect(const aHost: string; const aPort: Word = 25): Boolean; virtual; overload;
+
+    function Connect(const aHost: string; const aPort: Word = 25; const AIntf: string = LADDR_ANY): Boolean; virtual; overload;
     function Connect: Boolean; virtual; overload;
     
     function Get(var aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; virtual;
@@ -719,11 +719,11 @@ begin
   Dummy.Free;
 end;
 
-function TLSMTPClient.Connect(const aHost: string; const aPort: Word = 25): Boolean;
+function TLSMTPClient.Connect(const aHost: string; const aPort: Word; const AIntf: string): Boolean;
 begin
   Result := False;
   Disconnect(True);
-  if FConnection.Connect(aHost, aPort) then begin
+  if FConnection.Connect(aHost, aPort, AIntf) then begin
     FTempBuffer := '';
     FHost := aHost;
     FPort := aPort;
