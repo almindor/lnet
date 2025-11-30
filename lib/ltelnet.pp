@@ -159,8 +159,8 @@ type
     procedure SendCommand(const Command: Char; const Value: Boolean); override;
    public
     constructor Create(aOwner: TComponent); override;
-    
-    function Connect(const anAddress: string; const aPort: Word): Boolean;
+
+    function Connect(const anAddress: string; const aPort: Word; const AIntf: string = LADDR_ANY): Boolean;
     function Connect: Boolean;
     
     function Get(out aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
@@ -490,9 +490,9 @@ begin
   end;
 end;
 
-function TLTelnetClient.Connect(const anAddress: string; const aPort: Word): Boolean;
+function TLTelnetClient.Connect(const anAddress: string; const aPort: Word; const AIntf: string): Boolean;
 begin
-  Result := FConnection.Connect(anAddress, aPort);
+  Result := FConnection.Connect(anAddress, aPort, AIntf);
 end;
 
 function TLTelnetClient.Connect: Boolean;

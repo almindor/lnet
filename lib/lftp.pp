@@ -188,8 +188,8 @@ type
     
     function Send(const aData; const aSize: Integer; aSocket: TLSocket = nil): Integer; override;
     function SendMessage(const msg: string; aSocket: TLSocket = nil): Integer; override;
-    
-    function Connect(const aHost: string; const aPort: Word = 21): Boolean; virtual; overload;
+
+    function Connect(const aHost: string; const aPort: Word = 21; const AIntf: string = LADDR_ANY): Boolean; virtual; overload;
     function Connect: Boolean; virtual; overload;
     
     function Authenticate(const aUsername, aPassword: string): Boolean;
@@ -1087,11 +1087,11 @@ begin
     FData.Iterator.GetMessage(Result);
 end;
 
-function TLFTPClient.Connect(const aHost: string; const aPort: Word): Boolean;
+function TLFTPClient.Connect(const aHost: string; const aPort: Word; const AIntf: string): Boolean;
 begin
   Result := False;
   Disconnect(True);
-  if FControl.Connect(aHost, aPort) then begin
+  if FControl.Connect(aHost, aPort, AIntf) then begin
     FHost := aHost;
     FPort := aPort;
     FStatus.Insert(MakeStatusRec(fsCon, '', ''));
