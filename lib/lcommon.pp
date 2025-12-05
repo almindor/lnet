@@ -97,6 +97,42 @@ const
   LPROTO_RAW    =   255;
   LPROTO_MAX    =   256;
 
+  { Multicast constants - IPv4 }
+  {$IFDEF WINDOWS}
+  IP_MULTICAST_IF      = 9;
+  IP_MULTICAST_TTL     = 10;
+  IP_MULTICAST_LOOP    = 11;
+  IP_ADD_MEMBERSHIP    = 12;
+  IP_DROP_MEMBERSHIP   = 13;
+  {$ELSE}
+  IP_MULTICAST_IF      = 32;
+  IP_MULTICAST_TTL     = 33;
+  IP_MULTICAST_LOOP    = 34;
+  IP_ADD_MEMBERSHIP    = 35;
+  IP_DROP_MEMBERSHIP   = 36;
+  {$ENDIF}
+
+  { Multicast constants - IPv6 }
+  {$IFDEF WINDOWS}
+  IPV6_MULTICAST_IF    = 9;
+  IPV6_MULTICAST_HOPS  = 10;
+  IPV6_MULTICAST_LOOP  = 11;
+  IPV6_ADD_MEMBERSHIP  = 12;
+  IPV6_DROP_MEMBERSHIP = 13;
+  IPV6_JOIN_GROUP      = 12;  // Alias for IPV6_ADD_MEMBERSHIP
+  IPV6_LEAVE_GROUP     = 13;  // Alias for IPV6_DROP_MEMBERSHIP
+  {$ELSE}
+  IPV6_MULTICAST_IF    = 17;
+  IPV6_MULTICAST_HOPS  = 18;
+  IPV6_MULTICAST_LOOP  = 19;
+  IPV6_ADD_MEMBERSHIP  = 20;
+  IPV6_DROP_MEMBERSHIP = 21;
+  IPV6_JOIN_GROUP      = 20;  // Alias for IPV6_ADD_MEMBERSHIP
+  IPV6_LEAVE_GROUP     = 21;  // Alias for IPV6_DROP_MEMBERSHIP
+  {$ENDIF}
+
+  IPPROTO_IPV6         = 41;
+
 type
 
   { TLSocketAddress }
@@ -105,6 +141,20 @@ type
     case Integer of
       LAF_INET  : (IPv4: TInetSockAddr);
       LAF_INET6 : (IPv6: TInetSockAddr6);
+  end;
+
+  { TIPMreq - IPv4 Multicast }
+
+  TImReq = packed record
+    imr_multicast:      TInAddr;
+    imr_interface:      TInAddr;
+  end;
+
+  { TIPv6MReq - IPv6 Multicast }
+
+  TIPv6MReq = packed record
+    ipv6mr_multiaddr:   TIn6Addr;
+    ipv6mr_interface:   Cardinal;
   end;
 
   { Base functions }
