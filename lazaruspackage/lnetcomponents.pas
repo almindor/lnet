@@ -65,6 +65,7 @@ type
     property OnError;
     property Timeout;
     property Session;
+    property ReuseAddress;
   end;
   
   { TLTelnetClientComponent }
