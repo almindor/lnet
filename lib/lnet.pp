@@ -310,6 +310,7 @@ type
 
   TLUdp = class(TLConnection)
    protected
+    FReuseAddress: Boolean;
     function InitSocket(aSocket: TLSocket): TLSocket; override;
     
     function GetConnected: Boolean; override;
@@ -320,6 +321,7 @@ type
     function Bail(const msg: string): Boolean;
     
     procedure SetAddress(const Address: string);
+    procedure SetReuseAddress(const aValue: Boolean);
    public
     constructor Create(aOwner: TComponent); override;
 
@@ -341,6 +343,14 @@ type
     procedure Disconnect(const Forced: Boolean = True); override;
 
     procedure CallAction; override;
+
+    { Multicast methods }
+    function JoinMulticastGroup(const GroupIP: string; const Intf: string): Boolean;
+    function LeaveMulticastGroup(const GroupIP: string; const Intf: string): Boolean;
+    function SetMulticastTTL(const TTL: Byte): Boolean;
+    function SetMulticastLoop(const Loop: Boolean): Boolean;
+   public
+    property ReuseAddress: Boolean read FReuseAddress write SetReuseAddress;
   end;
   
   { TLTcp }
@@ -723,11 +733,15 @@ begin
     Arg := 1;
     if FSocketType = SOCK_DGRAM then begin
       if fpsetsockopt(FHandle, SOL_SOCKET, SO_BROADCAST, @Arg, Sizeof(Arg)) = SOCKET_ERROR then
-        Exit(Bail('SetSockOpt error', LSocketError));
-    end else if FReuseAddress then begin
+        Exit(Bail('SetSockOpt error', LSocketError));		
+    end;
+	
+    if FReuseAddress then begin
       Opt := SO_REUSEADDR;
-      {$ifdef WIN32} // I expect 64 has it oddly, so screw them for now
-      if (Win32Platform = 2) and (Win32MajorVersion >= 5) then
+      // Workaround ONLY for ancient Windows NT/2000/XP
+      // Modern Windows (Vista+) and all x64 versions don't need this
+      {$ifdef WIN32}
+      if (Win32Platform = 2) and (Win32MajorVersion < 6) then
         Opt := Integer(not Opt);
       {$endif}
       if fpsetsockopt(FHandle, SOL_SOCKET, Opt, @Arg, Sizeof(Arg)) = SOCKET_ERROR then
@@ -1211,7 +1225,8 @@ begin
 
   FRootSock := InitSocket(SocketClass.Create);
   FIterator := FRootSock;
-  
+
+  FRootSock.SetReuseAddress(FReuseAddress);
   if FRootSock.Listen(APort, AIntf) then begin
     FillAddressInfo(FRootSock.FPeerAddress, FRootSock.FSocketNet, LADDR_BR, aPort);
   
@@ -1248,6 +1263,12 @@ begin
   end else
     FillAddressInfo(FRootSock.FPeerAddress, FRootSock.FSocketNet, Address,
                                             FRootSock.PeerPort);
+end;
+
+procedure TLUdp.SetReuseAddress(const aValue: Boolean);
+begin
+  if (not FActive) or (not Assigned(FRootSock)) then
+    FReuseAddress := aValue;
 end;
 
 function TLUdp.InitSocket(aSocket: TLSocket): TLSocket;
@@ -1292,6 +1313,141 @@ procedure TLUdp.CallAction;
 begin
   if Assigned(FEventer) then
     FEventer.CallAction;
+end;
+
+function TLUdp.JoinMulticastGroup(const GroupIP: string; const Intf: string): Boolean;
+var
+  err: integer;
+  mreq4: TImReq;
+  mreq6: TIPv6MReq;
+  InterfaceIndex: Cardinal;
+begin
+  Result := False;
+  if not Assigned(FRootSock) then
+    Exit;
+
+  // Check if IPv4 or IPv6
+  if FRootSock.SocketNet = LAF_INET then begin
+    // IPv4 multicast
+    FillChar(mreq4, SizeOf(mreq4), 0);
+    mreq4.imr_multicast.s_addr := StrToNetAddr(GroupIP).s_addr;
+    mreq4.imr_interface.s_addr := StrToNetAddr(Intf).s_addr;
+
+    err := fpSetSockOpt(FRootSock.Handle, IPPROTO_IP, lCommon.IP_ADD_MEMBERSHIP, @mreq4, SizeOf(mreq4));
+    Result := (err = 0);
+  end
+  else if FRootSock.SocketNet = LAF_INET6 then begin
+    // IPv6 multicast
+    FillChar(mreq6, SizeOf(mreq6), 0);
+    mreq6.ipv6mr_multiaddr := StrToNetAddr6(GroupIP);
+
+    // Intf for IPv6 is interface index as string (e.g., "0" for any, "1" for first interface)
+    // If empty or "0", use 0 (any interface)
+    if (Intf = '') or (Intf = '0') or (Intf = '::') then
+      InterfaceIndex := 0
+    else
+      InterfaceIndex := StrToIntDef(Intf, 0);
+
+    mreq6.ipv6mr_interface := InterfaceIndex;
+
+    err := fpSetSockOpt(FRootSock.Handle, lCommon.IPPROTO_IPV6, lCommon.IPV6_ADD_MEMBERSHIP, @mreq6, SizeOf(mreq6));
+    Result := (err = 0);
+  end;
+end;
+
+function TLUdp.LeaveMulticastGroup(const GroupIP: string; const Intf: string): Boolean;
+var
+  err: integer;
+  mreq4: TImReq;
+  mreq6: TIPv6MReq;
+  InterfaceIndex: Cardinal;
+begin
+  Result := False;
+  if not Assigned(FRootSock) then
+    Exit;
+
+  // Check if IPv4 or IPv6
+  if FRootSock.SocketNet = LAF_INET then begin
+    // IPv4 multicast
+    FillChar(mreq4, SizeOf(mreq4), 0);
+    mreq4.imr_multicast.s_addr := StrToNetAddr(GroupIP).s_addr;
+    mreq4.imr_interface.s_addr := StrToNetAddr(Intf).s_addr;
+
+    err := fpSetSockOpt(FRootSock.Handle, IPPROTO_IP, lCommon.IP_DROP_MEMBERSHIP, @mreq4, SizeOf(mreq4));
+    Result := (err = 0);
+  end
+  else if FRootSock.SocketNet = LAF_INET6 then begin
+    // IPv6 multicast
+    FillChar(mreq6, SizeOf(mreq6), 0);
+    mreq6.ipv6mr_multiaddr := StrToNetAddr6(GroupIP);
+
+    if (Intf = '') or (Intf = '0') or (Intf = '::') then
+      InterfaceIndex := 0
+    else
+      InterfaceIndex := StrToIntDef(Intf, 0);
+
+    mreq6.ipv6mr_interface := InterfaceIndex;
+
+    err := fpSetSockOpt(FRootSock.Handle, lCommon.IPPROTO_IPV6, lCommon.IPV6_DROP_MEMBERSHIP, @mreq6, SizeOf(mreq6));
+    Result := (err = 0);
+  end;
+end;
+
+function TLUdp.SetMulticastTTL(const TTL: Byte): Boolean;
+var
+  err: integer;
+  Value: Byte;
+  Hops: Integer;
+begin
+  Result := False;
+  if not Assigned(FRootSock) then
+    Exit;
+
+  // Check if IPv4 or IPv6
+  if FRootSock.SocketNet = LAF_INET then begin
+    // IPv4 uses TTL (byte)
+    Value := TTL;
+    err := fpSetSockOpt(FRootSock.Handle, IPPROTO_IP, lCommon.IP_MULTICAST_TTL, @Value, SizeOf(Value));
+    Result := (err = 0);
+  end
+  else if FRootSock.SocketNet = LAF_INET6 then begin
+    // IPv6 uses Hops (integer)
+    Hops := TTL;
+    err := fpSetSockOpt(FRootSock.Handle, lCommon.IPPROTO_IPV6, lCommon.IPV6_MULTICAST_HOPS, @Hops, SizeOf(Hops));
+    Result := (err = 0);
+  end;
+end;
+
+function TLUdp.SetMulticastLoop(const Loop: Boolean): Boolean;
+var
+  err: integer;
+  {$IFDEF WINDOWS}
+  Value: Cardinal;
+  {$ELSE}
+  Value: Byte;
+  {$ENDIF}
+  Value6: Integer;
+begin
+  Result := False;
+  if not Assigned(FRootSock) then
+    Exit;
+
+  if FRootSock.SocketNet = LAF_INET then begin
+    if Loop then
+      Value := 1
+    else
+      Value := 0;
+    err := fpSetSockOpt(FRootSock.Handle, IPPROTO_IP, lCommon.IP_MULTICAST_LOOP, @Value, SizeOf(Value));
+    Result := (err = 0);
+  end
+  else if FRootSock.SocketNet = LAF_INET6 then begin
+    if Loop then
+      Value6 := 1
+    else
+      Value6 := 0;
+    err := fpSetSockOpt(FRootSock.Handle, lCommon.IPPROTO_IPV6, lCommon.IPV6_MULTICAST_LOOP, @Value6, SizeOf(Value6));
+    Result := (err = 0);
+  end;
 end;
 
 function TLUdp.GetConnected: Boolean;
