@@ -68,15 +68,7 @@ implementation
   {$i lclwinceeventer.inc}
 {$endif}
 
-{$ifdef LCLGTK}
-  {$i lclgtkeventer.inc}
-{$endif}
-
-{$ifdef LCLGTK2}
-  {$i lclgtkeventer.inc}
-{$endif}
-
-{$ifdef LCLGTK3}
+{$if Defined(LCLGTK) or Defined(LCLGTK2) or Defined(LCLGTK3)}
   {$i lclgtkeventer.inc}
 {$endif}
 
